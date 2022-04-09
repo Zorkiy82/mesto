@@ -1,0 +1,7 @@
+.header__line {
+  color: white;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  margin-top: 41px;
+  overflow: hidden;
+  height: 0;
+}

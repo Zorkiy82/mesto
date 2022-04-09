@@ -1,0 +1,14 @@
+.page__button {
+  background: none;
+  padding: 0;
+  border-style: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity .3s;
+}
+
+.page__button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
