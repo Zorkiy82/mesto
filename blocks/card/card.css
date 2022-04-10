@@ -2,7 +2,6 @@
   display: grid;
   grid-template-rows: 1fr calc(361px - 282px);
   border-radius: 10px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   overflow: hidden;
-
 }

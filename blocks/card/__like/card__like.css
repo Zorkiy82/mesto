@@ -7,10 +7,10 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  transition: opacity .4s;
+  transition: opacity 0.4s;
 }
 
 .card__like:hover {
-  opacity: .5;
+  opacity: 0.5;
   cursor: pointer;
 }

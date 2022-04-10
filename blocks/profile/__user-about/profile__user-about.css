@@ -5,4 +5,23 @@
   font-size: 18px;
   line-height: 22px;
   margin-top: 16px;
+  max-width: 350px;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 581.5px) {
+  .profile__user-about {
+    margin-top: 14px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .profile__user-about {
+    font-size: 14px;
+    line-height: 17px;
+    max-width: 270px;
+  }
 }

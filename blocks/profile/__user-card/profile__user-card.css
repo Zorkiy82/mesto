@@ -1,4 +1,11 @@
 .profile__user-card {
   display: flex;
-  color: #FFFFFF;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 581.5px) {
+  .profile__user-card {
+    flex-direction: column;
+    align-items: center;
+  }
 }

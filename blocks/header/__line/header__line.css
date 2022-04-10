@@ -5,3 +5,9 @@
   overflow: hidden;
   height: 0;
 }
+
+@media screen and (max-width: 425px) {
+  .header__line {
+    margin-top: 31.6px;
+  }
+}

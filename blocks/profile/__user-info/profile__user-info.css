@@ -5,3 +5,11 @@
   flex-direction: column;
   justify-content: center;
 }
+
+@media screen and (max-width: 581.5px) {
+  .profile__user-info {
+    width: 100%;
+    padding-left: 0;
+    align-items: center;
+  }
+}
