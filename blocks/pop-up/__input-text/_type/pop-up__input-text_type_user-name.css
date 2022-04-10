@@ -1,0 +1,10 @@
+.pop-up__input-text_type_user-name {
+  margin-top: calc(54px - 13px);
+}
+
+@media screen and (max-width: 581.5px) {
+  .pop-up__input-text_type_user-name {
+    margin-top: calc(75px - 13px);
+  }
+}
+

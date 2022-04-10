@@ -1,0 +1,16 @@
+.pop-up__input-text {
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  width: 100%;
+  height: calc(13px*2 + 17px);
+  text-overflow: ellipsis ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
