@@ -1,9 +1,8 @@
 .card {
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  width: 282px;
-  height: 361px;
+  grid-template-rows: 1fr calc(361px - 282px);
   border-radius: 10px;
   background-color: #FFFFFF;
+  overflow: hidden;
 
 }
