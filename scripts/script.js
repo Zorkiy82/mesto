@@ -18,12 +18,10 @@ const jobInput = formElement.querySelector(
 const cardsConteiner = document.querySelector(".cards");
 const likes = cardsConteiner.querySelectorAll(".card__like");
 
-
-
 function popUpToggle() {
   nameInput.value = userName.textContent;
   jobInput.value = userAbout.textContent;
-  popUp.classList.toggle("pop-up_display_flex");
+  popUp.classList.toggle("popup_opened");
 }
 
 function formSubmitHandler(evt) {
@@ -31,7 +29,6 @@ function formSubmitHandler(evt) {
   userName.textContent = nameInput.value;
   userAbout.textContent = jobInput.value;
   popUpToggle();
-
 }
 
 function likeHandler(evt) {
