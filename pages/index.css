@@ -13,6 +13,7 @@
 @import url(../blocks/pop-up/__input-text/_type/pop-up__input-text_type_user-about.css);
 @import url(../blocks/pop-up/__submit-button/pop-up__submit-button.css);
 @import url(../blocks/pop-up/__close-button/pop-up__close-button.css);
+@import url(../blocks/pop-up/_display/pop-up_display_flex.css);
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
@@ -37,6 +38,7 @@
 @import url(../blocks/card/__description/card__description.css);
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__like/card__like.css);
+@import url(../blocks/card/__like/_black-heart/card__like_black-heart.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
