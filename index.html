@@ -9,36 +9,9 @@
   <body class="page">
     <header class="header">
       <div class="header__logo"></div>
-      <div class="header__line">
-        <h1>Проектная работа ПР4</h1>
-      </div>
     </header>
 
     <main class="main">
-      <section class="pop-up">
-        <form class="pop-up__window">
-          <h2 class="pop-up__title">Редактировать профиль</h2>
-          <input
-            type="text"
-            placeholder="Имя пользователя"
-            class="pop-up__input-text pop-up__input-text_type_user-name"
-          />
-          <input
-            type="text"
-            placeholder="О пользователе"
-            class="pop-up__input-text pop-up__input-text_type_user-about"
-          />
-
-          <button class="pop-up__submit-button page__button" type="submit">
-            Сохранить
-          </button>
-          <button
-            class="pop-up__close-button page__button"
-            type="button"
-          ></button>
-        </form>
-      </section>
-
       <section class="profile">
         <div class="profile__user-card">
           <img
@@ -49,97 +22,160 @@
 
           <div class="profile__user-info">
             <div class="profile__user-info-inner-container">
-              <h2 class="profile__user-name">Жак-Ив Кусто</h2>
+              <h1 class="profile__user-name">Жак-Ив Кусто</h1>
               <button
                 class="profile__edit-button page__button"
                 type="button"
+                aria-label="Изменить"
               ></button>
             </div>
             <p class="profile__user-about">Исследователь океана</p>
           </div>
         </div>
 
-        <button class="profile__add-button page__button" type="button"></button>
+        <button
+          class="profile__add-button page__button"
+          type="button"
+          aria-label="Добавить"
+        ></button>
       </section>
 
-      <section class="cards">
-        <div class="card">
+      <section class="cards" aria-label="Секция с карточками">
+        <article class="card">
           <img
             class="card__image"
             src="./images/kirill-pershin-1088404-unsplash.jpg"
-            alt="Карачаевск"
+            alt="Старая каменная церковь на фоне гор"
           />
           <div class="card__description">
-            <h3 class="card__title">Карачаевск</h3>
-            <div class="card__like"></div>
+            <h2 class="card__title">Карачаевск</h2>
+            <button
+              class="card__like"
+              type="button"
+              aria-label="Лайк в форме сердечка"
+            ></button>
           </div>
-        </div>
+        </article>
 
-        <div class="card">
+        <article class="card">
           <img
             class="card__image"
             src="./images/kirill-pershin-1404681-unsplash.jpg"
-            alt="Гора Эльбрус"
+            alt="Холмистая степь на фоне вечернего неба"
           />
           <div class="card__description">
-            <h3 class="card__title">Гора Эльбрус</h3>
-            <div class="card__like"></div>
+            <h2 class="card__title">Гора Эльбрус</h2>
+            <button
+              class="card__like"
+              type="button"
+              aria-label="Лайк в форме сердечка"
+            ></button>
           </div>
-        </div>
+        </article>
 
-        <div class="card">
+        <article class="card">
           <img
             class="card__image"
             src="./images/kirill-pershin-1556355-unsplash.jpg"
-            alt="Домбай"
+            alt="Горный пейзаж в серых тонах на фоне хмурого облачного неба"
           />
           <div class="card__description">
-            <h3 class="card__title">Домбай</h3>
-            <div class="card__like"></div>
+            <h2 class="card__title">
+              Горный пейзаж в серых тонах на фоне хмурого облачного неба
+            </h2>
+            <button
+              class="card__like"
+              type="button"
+              aria-label="Лайк в форме сердечка"
+            ></button>
           </div>
-        </div>
+        </article>
 
-        <div class="card">
+        <article class="card">
           <img
             class="card__image"
             src="./images/kirill-pershin-1404681-unsplash.jpg"
-            alt="Гора Эльбрус"
+            alt="Холмистая степь на фоне вечернего неба"
           />
           <div class="card__description">
-            <h3 class="card__title">Гора Эльбрус</h3>
-            <div class="card__like"></div>
+            <h2 class="card__title">Гора Эльбрус</h2>
+            <button
+              class="card__like"
+              type="button"
+              aria-label="Лайк в форме сердечка"
+            ></button>
           </div>
-        </div>
+        </article>
 
-        <div class="card">
+        <article class="card">
           <img
             class="card__image"
             src="./images/kirill-pershin-1556355-unsplash.jpg"
-            alt="Домбай"
+            alt="Горный пейзаж в серых тонах на фоне хмурого облачного неба"
           />
           <div class="card__description">
-            <h3 class="card__title">Домбай</h3>
-            <div class="card__like"></div>
+            <h2 class="card__title">
+              Горный пейзаж в серых тонах на фоне хмурого облачного неба
+            </h2>
+            <button
+              class="card__like"
+              type="button"
+              aria-label="Лайк в форме сердечка"
+            ></button>
           </div>
-        </div>
+        </article>
 
-        <div class="card">
+        <article class="card">
           <img
             class="card__image"
             src="./images/kirill-pershin-1088404-unsplash.jpg"
-            alt="Карачаево-Черкессия"
+            alt="Старая каменная церковь на фоне гор"
           />
           <div class="card__description">
-            <h3 class="card__title">Карачаево-Черкессия</h3>
-            <div class="card__like"></div>
+            <h2 class="card__title">Карачаево-Черкессия</h2>
+            <button
+              class="card__like"
+              type="button"
+              aria-label="Лайк в форме сердечка"
+            ></button>
           </div>
-        </div>
+        </article>
       </section>
     </main>
 
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
+
+    <div class="pop-up">
+      <div class="pop-up__window">
+        <h2 class="pop-up__title">Редактировать профиль</h2>
+        <form name="editForm" method="POST">
+          <input
+            class="pop-up__input-text pop-up__input-text_type_user-name"
+            name="userName"
+            type="text"
+            placeholder="Имя пользователя"
+          />
+
+          <input
+            class="pop-up__input-text pop-up__input-text_type_user-about"
+            name="userAbout"
+            type="text"
+            placeholder="О пользователе"
+          />
+
+          <button class="pop-up__submit-button page__button" type="submit">
+            Сохранить
+          </button>
+        </form>
+        <button
+          class="pop-up__close-button page__button"
+          type="button"
+          aria-label="Закрыть"
+        ></button>
+      </div>
+    </div>
 
     <script src="./scripts/script.js"></script>
   </body>

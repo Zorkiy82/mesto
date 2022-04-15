@@ -15,30 +15,34 @@ const jobInput = formElement.querySelector(
   ".pop-up__input-text_type_user-about"
 );
 
-const cardsConteiner = document.querySelector(".cards");
-const likes = cardsConteiner.querySelectorAll(".card__like");
+// const cardsConteiner = document.querySelector(".cards");
+// const likes = cardsConteiner.querySelectorAll(".card__like");
 
-function popUpToggle() {
+function popUpOpened() {
   nameInput.value = userName.textContent;
   jobInput.value = userAbout.textContent;
-  popUp.classList.toggle("popup_opened");
+  popUp.classList.add("popup_opened");
+}
+
+function popUpClose() {
+  popUp.classList.remove("popup_opened");
 }
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   userAbout.textContent = jobInput.value;
-  popUpToggle();
+  popUpClose();
 }
 
-function likeHandler(evt) {
-  evt.target.classList.toggle("card__like_black-heart");
-}
+// function likeHandler(evt) {
+//   evt.target.classList.toggle("card__like_is-active");
+// }
 
-editButton.addEventListener("click", popUpToggle);
-closeButton.addEventListener("click", popUpToggle);
+editButton.addEventListener("click", popUpOpened);
+closeButton.addEventListener("click", popUpClose);
 formElement.addEventListener("submit", formSubmitHandler);
 
-likes.forEach(function (item) {
-  item.addEventListener("click", likeHandler);
-});
+// likes.forEach(function (item) {
+//   item.addEventListener("click", likeHandler);
+// });

@@ -6,7 +6,7 @@
   line-height: 1.14;
   max-width: 350px;
   text-overflow: ellipsis;
-  white-space: pre-wrap;
+  white-space: nowrap;
   overflow: hidden;
 }
 
