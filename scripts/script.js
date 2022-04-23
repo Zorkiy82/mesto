@@ -1,28 +1,28 @@
 const initialCards = [
   {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
   },
   {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
   },
   {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
   },
   {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
   },
   {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
   },
   {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  },
 ];
 
 const userCard = document.querySelector(".profile__user-card");
@@ -42,8 +42,35 @@ const jobInput = formElement.querySelector(
   ".pop-up__input-text_type_user-about"
 );
 
-// const cardsConteiner = document.querySelector(".cards");
-// const likes = cardsConteiner.querySelectorAll(".card__like");
+const cardTemplate = document.querySelector("#card").content;
+const cardsConteiner = document.querySelector(".cards");
+
+function deleteButtonHandler(evt) {
+  evt.target.closest(".card").remove();
+}
+
+function likeButtonHandler(evt) {
+  evt.target.classList.toggle("card__like_is-active");
+}
+
+// Создаем новую карточку
+
+function createCard(item) {
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardElementImage = cardElement.querySelector(".card__image");
+  const cardElementTitel = cardElement.querySelector(".card__title");
+  const cardElementLikeButton = cardElement.querySelector(".card__like");
+  const cardElementDeleteButton = cardElement.querySelector(".card__delete-button");
+
+  cardElementImage.style.backgroundImage = `url('${item.link}')`;
+  cardElementTitel.textContent = item.name;
+  cardElementLikeButton.addEventListener('click', likeButtonHandler);
+  cardElementDeleteButton.addEventListener('click', deleteButtonHandler);
+
+  cardsConteiner.prepend(cardElement);
+}
+
+initialCards.forEach(createCard);
 
 function popUpOpened() {
   nameInput.value = userName.textContent;
@@ -62,14 +89,9 @@ function formSubmitHandler(evt) {
   popUpClose();
 }
 
-// function likeHandler(evt) {
-//   evt.target.classList.toggle("card__like_is-active");
-// }
+
 
 editButton.addEventListener("click", popUpOpened);
 closeButton.addEventListener("click", popUpClose);
 formElement.addEventListener("submit", formSubmitHandler);
 
-// likes.forEach(function (item) {
-//   item.addEventListener("click", likeHandler);
-// });

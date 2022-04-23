@@ -1,5 +1,6 @@
 .card {
   display: grid;
+  position: relative;
   width: 100%;
   grid-template-rows: 1fr calc(361px - 282px);
   border-radius: 10px;
