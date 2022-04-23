@@ -40,107 +40,7 @@
         ></button>
       </section>
 
-      <section class="cards" aria-label="Секция с карточками">
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/kirill-pershin-1088404-unsplash.jpg"
-            alt="Старая каменная церковь на фоне гор"
-          />
-          <div class="card__description">
-            <h2 class="card__title">Карачаевск</h2>
-            <button
-              class="card__like"
-              type="button"
-              aria-label="Лайк в форме сердечка"
-            ></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/kirill-pershin-1404681-unsplash.jpg"
-            alt="Холмистая степь на фоне вечернего неба"
-          />
-          <div class="card__description">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button
-              class="card__like"
-              type="button"
-              aria-label="Лайк в форме сердечка"
-            ></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/kirill-pershin-1556355-unsplash.jpg"
-            alt="Горный пейзаж в серых тонах на фоне хмурого облачного неба"
-          />
-          <div class="card__description">
-            <h2 class="card__title">
-              Горный пейзаж в серых тонах на фоне хмурого облачного неба
-            </h2>
-            <button
-              class="card__like"
-              type="button"
-              aria-label="Лайк в форме сердечка"
-            ></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/kirill-pershin-1404681-unsplash.jpg"
-            alt="Холмистая степь на фоне вечернего неба"
-          />
-          <div class="card__description">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button
-              class="card__like"
-              type="button"
-              aria-label="Лайк в форме сердечка"
-            ></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/kirill-pershin-1556355-unsplash.jpg"
-            alt="Горный пейзаж в серых тонах на фоне хмурого облачного неба"
-          />
-          <div class="card__description">
-            <h2 class="card__title">
-              Горный пейзаж в серых тонах на фоне хмурого облачного неба
-            </h2>
-            <button
-              class="card__like"
-              type="button"
-              aria-label="Лайк в форме сердечка"
-            ></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/kirill-pershin-1088404-unsplash.jpg"
-            alt="Старая каменная церковь на фоне гор"
-          />
-          <div class="card__description">
-            <h2 class="card__title">Карачаево-Черкессия</h2>
-            <button
-              class="card__like"
-              type="button"
-              aria-label="Лайк в форме сердечка"
-            ></button>
-          </div>
-        </article>
-      </section>
+      <section class="cards" aria-label="Секция с карточками"></section>
     </main>
 
     <footer class="footer">
@@ -176,6 +76,20 @@
         ></button>
       </div>
     </div>
+
+    <template id="card">
+      <article class="card">
+        <div class="card__image" style="background-image: url('#')"></div>
+        <div class="card__description">
+          <h2 class="card__title"></h2>
+          <button
+            class="card__like"
+            type="button"
+            aria-label="Лайк в форме сердечка"
+          ></button>
+        </div>
+      </article>
+    </template>
 
     <script src="./scripts/script.js"></script>
   </body>
