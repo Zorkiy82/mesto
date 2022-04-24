@@ -1,7 +1,7 @@
 .card {
   display: grid;
   position: relative;
-  width: 100%;
+  width: 282px;
   grid-template-rows: 1fr calc(361px - 282px);
   border-radius: 10px;
   background-color: #ffffff;

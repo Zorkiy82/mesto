@@ -63,8 +63,8 @@ function closePopUp(event) {
   event.target.closest(".popup_opened").classList.remove("popup_opened");
 }
 
-function openPopUp(item) {
-  item.classList.add("popup_opened");
+function openPopUp(popUpElement) {
+  popUpElement.classList.add("popup_opened");
 }
 
 function editProfileButtonHandler() {
@@ -82,13 +82,14 @@ function profilePopUpFormHandler(event) {
 
 function cardPopUpFormHandler(event) {
   event.preventDefault();
-  const newCardElement = {};
-  newCardElement.name = cardTitleInput.value;
-  newCardElement.link = cardUrlInput.value;
-  createCard(newCardElement);
+  const newCardElement = {
+    name: cardTitleInput.value,
+    link: cardUrlInput.value,
+  };
+
+  addCard(cardsConteiner, createCard(newCardElement));
   closePopUp(event);
-  cardTitleInput.value = "";
-  cardUrlInput.value = "";
+  event.target.reset();
 }
 
 function deleteButtonHandler(evt) {
@@ -99,18 +100,18 @@ function likeButtonHandler(evt) {
   evt.target.classList.toggle("card__like_is-active");
 }
 
-function imagePopUpHandler(event) {
-  const cardElementLink = event.target.style.backgroundImage.slice(5, -2);
-  const cardElementTitel = event.target
-    .closest(".card")
-    .querySelector(".card__title").textContent;
-  imagePopUpImage.src = cardElementLink;
-  imagePopUpTitel.textContent = cardElementTitel;
+function imagePopUpHandler(cardData) {
+  imagePopUpImage.src = cardData.link;
+  imagePopUpTitel.textContent = cardData.name;
 
   openPopUp(imagePopUp);
 }
 
-function createCard(item) {
+function addCard(listElement, cardElement) {
+  listElement.prepend(cardElement);
+}
+
+function createCard(cardData) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardElementImage = cardElement.querySelector(".card__image");
 
@@ -120,16 +121,18 @@ function createCard(item) {
     ".card__delete-button"
   );
 
-  cardElementImage.style.backgroundImage = `url('${item.link}')`;
-  cardElementTitel.textContent = item.name;
+  cardElementImage.style.backgroundImage = `url('${cardData.link}')`;
+  cardElementTitel.textContent = cardData.name;
   cardElementLikeButton.addEventListener("click", likeButtonHandler);
   cardElementDeleteButton.addEventListener("click", deleteButtonHandler);
-  cardElementImage.addEventListener("click", imagePopUpHandler);
+  cardElementImage.addEventListener("click", () => imagePopUpHandler(cardData));
 
-  cardsConteiner.prepend(cardElement);
+  return cardElement;
 }
 
-initialCards.forEach(createCard);
+initialCards.forEach((cardData) =>
+  addCard(cardsConteiner, createCard(cardData))
+);
 
 popUpCloseButtons.forEach(function (item) {
   item.addEventListener("click", closePopUp);
