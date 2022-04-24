@@ -6,5 +6,8 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-color: pink;
+}
 
+.card__image:hover {
+  cursor: pointer;
 }
