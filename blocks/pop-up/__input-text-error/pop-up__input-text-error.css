@@ -1,5 +1,5 @@
 .pop-up__input-text-error {
-  visibility: hidden;
+  /* visibility: hidden; */
   margin: 0;
   margin-top: 5px;
   font-style: normal;
@@ -7,5 +7,5 @@
   font-size: 12px;
   line-height: 15px;
 
-  color: #ff0000;
+  color: white;
 }

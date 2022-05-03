@@ -25,14 +25,14 @@ const initialCards = [
   },
 ];
 
-const validationSetupData = {
-  formSelector: "page__form",
-  inputSelector: "pop-up__input-text",
-  submitButtonSelector: "pop-up__submit-button",
-  inactiveButtonClass: "pop-up__submit-button_disabled",
-  inputErrorClass: "pop-up__input-text-error",
-  errorClass: "pop-up__input-text-error_visible",
-};
+// const validationSetupData = {
+//   formSelector: "page__form",
+//   inputSelector: "pop-up__input-text",
+//   submitButtonSelector: "pop-up__submit-button",
+//   inactiveButtonClass: "pop-up__submit-button_disabled",
+//   inputErrorClass: "pop-up__input-text-error",
+//   errorClass: "pop-up__input-text-error_visible",
+// };
 
 const profile = document.querySelector(".profile");
 const editProfileButton = profile.querySelector(".profile__edit-button");
@@ -83,14 +83,12 @@ function editProfileButtonHandler() {
 }
 
 function profilePopUpFormHandler(event) {
-  event.preventDefault();
   userName.textContent = userNameInput.value;
   userAbout.textContent = userAboutInput.value;
   closePopUp(event);
 }
 
 function cardPopUpFormHandler(event) {
-  event.preventDefault();
   const newCardElement = {
     name: cardTitleInput.value,
     link: cardUrlInput.value,
@@ -138,6 +136,19 @@ function createCard(cardData) {
 
   return cardElement;
 }
+
+//Чтобы поля инпута небыли пустыми в момент первой инициализации состояния кнопок.
+userNameInput.value = userName.textContent;
+userAboutInput.value = userAbout.textContent;
+
+enableValidation({
+  formSelector: "page__form",
+  inputSelector: "pop-up__input-text",
+  submitButtonSelector: "pop-up__submit-button",
+  inactiveButtonClass: "pop-up__submit-button_disabled",
+  inputErrorClass: "pop-up__input-text-error",
+  errorClass: "pop-up__input-text-error_visible",
+});
 
 initialCards.forEach((cardData) =>
   addCard(cardsConteiner, createCard(cardData))
