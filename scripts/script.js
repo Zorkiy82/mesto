@@ -25,6 +25,15 @@ const initialCards = [
   },
 ];
 
+const validationSetupData = {
+  formSelector: "page__form",
+  inputSelector: "pop-up__input-text",
+  submitButtonSelector: "pop-up__submit-button",
+  inactiveButtonClass: "pop-up__submit-button_disabled",
+  inputErrorClass: "pop-up__input-text-error",
+  errorClass: "pop-up__input-text-error_visible",
+};
+
 const profile = document.querySelector(".profile");
 const editProfileButton = profile.querySelector(".profile__edit-button");
 const addCardButton = profile.querySelector(".profile__add-button");

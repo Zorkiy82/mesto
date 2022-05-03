@@ -50,20 +50,34 @@
     <div class="pop-up" id="edit-profile-pop-up">
       <div class="pop-up__window">
         <h2 class="pop-up__title">Редактировать профиль</h2>
-        <form name="editForm2" method="POST">
+        <form class="page__form" name="editForm2" method="POST">
           <input
             class="pop-up__input-text pop-up__input-text_type_user-name"
             name="userName"
+            id="user-name"
             type="text"
-            placeholder="Имя пользователя"
+            minlength="2"
+            maxlength="40"
+            required
+            placeholder="Имя"
           />
+          <span class="pop-up__input-text-error user-name-error"
+            >Заполните это поле</span
+          >
 
           <input
             class="pop-up__input-text pop-up__input-text_type_user-about"
             name="userAbout"
+            id="user-about"
             type="text"
-            placeholder="О пользователе"
+            minlength="2"
+            maxlength="200"
+            required
+            placeholder="О себе"
           />
+          <span class="pop-up__input-text-error user-about-error"
+            >Заполните это поле</span
+          >
 
           <button class="pop-up__submit-button page__button" type="submit">
             Сохранить
@@ -80,21 +94,31 @@
     <div class="pop-up" id="add-card-pop-up">
       <div class="pop-up__window">
         <h2 class="pop-up__title">Новое место</h2>
-        <form name="editForm" method="POST">
+        <form class="page__form" name="editForm" method="POST">
           <input
             class="pop-up__input-text pop-up__input-text_type_card-title"
             name="cardTitel"
+            id="card-titel"
             type="text"
+            minlength="2"
+            maxlength="30"
+            required
             placeholder="Название"
           />
-
+          <span class="pop-up__input-text-error card-titel-error"
+            >Заполните это поле</span
+          >
           <input
             class="pop-up__input-text pop-up__input-text_type_image-URL"
             name="imageURL"
-            type="text"
+            id="image-url"
+            type="url"
             placeholder="Ссылка на картинку"
+            required
           />
-
+          <span class="pop-up__input-text-error image-url-error"
+            >Заполните это поле</span
+          >
           <button class="pop-up__submit-button page__button" type="submit">
             Создать
           </button>
@@ -142,6 +166,7 @@
       </article>
     </template>
 
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/script.js"></script>
   </body>
 </html>
