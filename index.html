@@ -61,9 +61,9 @@
             required
             placeholder="Имя"
           />
-          <span class="pop-up__input-text-error user-name-error"
-            >Заполните это поле</span
-          >
+          <div class="pop-up__error-container">
+            <span class="pop-up__input-text-error user-name-error"></span>
+          </div>
 
           <input
             class="pop-up__input-text pop-up__input-text_type_user-about"
@@ -75,9 +75,9 @@
             required
             placeholder="О себе"
           />
-          <span class="pop-up__input-text-error user-about-error"
-            >Заполните это поле</span
-          >
+          <div class="pop-up__error-container">
+            <span class="pop-up__input-text-error user-about-error"></span>
+          </div>
 
           <button class="pop-up__submit-button page__button" type="submit">
             Сохранить
@@ -94,7 +94,7 @@
     <div class="pop-up" id="add-card-pop-up">
       <div class="pop-up__window">
         <h2 class="pop-up__title">Новое место</h2>
-        <form class="page__form" name="editForm" method="POST" >
+        <form class="page__form" name="editForm" method="POST">
           <input
             class="pop-up__input-text pop-up__input-text_type_card-title"
             name="cardTitel"
@@ -105,9 +105,9 @@
             required
             placeholder="Название"
           />
-          <span class="pop-up__input-text-error card-titel-error"
-            >Заполните это поле</span
-          >
+          <div class="pop-up__error-container">
+            <span class="pop-up__input-text-error card-titel-error"></span>
+          </div>
           <input
             class="pop-up__input-text pop-up__input-text_type_image-URL"
             name="imageURL"
@@ -116,9 +116,9 @@
             placeholder="Ссылка на картинку"
             required
           />
-          <span class="pop-up__input-text-error image-url-error"
-            >Заполните это поле</span
-          >
+          <div class="pop-up__error-container">
+            <span class="pop-up__input-text-error image-url-error"></span>
+          </div>
           <button class="pop-up__submit-button page__button" type="submit">
             Создать
           </button>

@@ -68,6 +68,8 @@ const popUpCloseButtons = document.querySelectorAll(".pop-up__close-button");
 const cardTemplate = document.querySelector("#card").content;
 const cardsConteiner = document.querySelector(".cards");
 
+let myEvent = new Event("input");
+
 function closePopUp(event) {
   event.target.closest(".popup_opened").classList.remove("popup_opened");
 }
@@ -79,6 +81,8 @@ function openPopUp(popUpElement) {
 function editProfileButtonHandler() {
   userNameInput.value = userName.textContent;
   userAboutInput.value = userAbout.textContent;
+  userNameInput.dispatchEvent(myEvent);
+  userAboutInput.dispatchEvent(myEvent);
   openPopUp(profilePopUp);
 }
 
@@ -96,7 +100,6 @@ function cardPopUpFormHandler(event) {
 
   addCard(cardsConteiner, createCard(newCardElement));
   closePopUp(event);
-  event.target.reset();
 }
 
 function deleteButtonHandler(evt) {
@@ -137,9 +140,9 @@ function createCard(cardData) {
   return cardElement;
 }
 
-//Чтобы поля инпута небыли пустыми в момент первой инициализации состояния кнопок.
-userNameInput.value = userName.textContent;
-userAboutInput.value = userAbout.textContent;
+// //Чтобы поля инпута небыли пустыми в момент первой инициализации состояния кнопок.
+// userNameInput.value = userName.textContent;
+// userAboutInput.value = userAbout.textContent;
 
 enableValidation({
   formSelector: "page__form",
