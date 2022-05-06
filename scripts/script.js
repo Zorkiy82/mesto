@@ -30,7 +30,7 @@ const validationSetupData = {
   inputSelector: "pop-up__input",
   submitButtonSelector: "pop-up__submit-button",
   inactiveButtonClass: "pop-up__submit-button_disabled",
-  inputErrorClass: "pop-up__input-text-error",
+  inputErrorClass: "pop-up__input_error",
   errorClass: "pop-up__input-text-error_visible",
 };
 
@@ -105,6 +105,7 @@ function popUpCloseButtonHeandler(targetElement) {
       hideInputError(formElement, inputElement, validationSetupData);
     });
   }
+
   closePopUp(popUpElement);
 }
 
@@ -148,7 +149,6 @@ function likeButtonHandler(evt) {
 function imagePopUpHandler(cardData) {
   imagePopUpImage.src = cardData.link;
   imagePopUpTitel.textContent = cardData.name;
-
   openPopUp(imagePopUp);
 }
 
@@ -159,7 +159,6 @@ function addCard(listElement, cardElement) {
 function createCard(cardData) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardElementImage = cardElement.querySelector(".card__image");
-
   const cardElementTitel = cardElement.querySelector(".card__title");
   const cardElementLikeButton = cardElement.querySelector(".card__like");
   const cardElementDeleteButton = cardElement.querySelector(
@@ -194,6 +193,7 @@ addCardButton.addEventListener("click", function () {
 });
 
 cardPopUpForm.addEventListener("submit", cardPopUpFormHandler);
+
 popUpsList.forEach((popUpElement) => {
   popUpElement.addEventListener("mousedown", (evt) => {
     if (evt.target === evt.currentTarget) {
