@@ -74,19 +74,20 @@ const cardsConteiner = document.querySelector(".cards");
 
 let myEvent = new Event("input");
 
+function keydownHeandler(evt) {
+  const popUpElement = document.querySelector(".popup_opened");
+  if (evt.key === "Escape") {
+    popUpCloseButtonHeandler(popUpElement);
+  }
+}
 
 function closePopUp(popUpElement) {
-  // window.removeEventListener('keydown',(evt));
+  window.removeEventListener("keydown", keydownHeandler);
   popUpElement.classList.remove("popup_opened");
 }
 
 function openPopUp(popUpElement) {
-  // window.addEventListener('keydown',(evt,popUpElement)=>{
-  //   console.log(evt.key);
-  //   if (evt.key === 'Escape') {
-  //     popUpCloseButtonHeandler(popUpElement);
-  //   }
-  // });
+  window.addEventListener("keydown", keydownHeandler);
   popUpElement.classList.add("popup_opened");
 }
 
@@ -193,8 +194,8 @@ addCardButton.addEventListener("click", function () {
 });
 
 cardPopUpForm.addEventListener("submit", cardPopUpFormHandler);
-popUpsList.forEach((popUpElement)=>{
-  popUpElement.addEventListener('click',(evt)=>{
+popUpsList.forEach((popUpElement) => {
+  popUpElement.addEventListener("mousedown", (evt) => {
     if (evt.target === evt.currentTarget) {
       popUpCloseButtonHeandler(evt.target);
     }
