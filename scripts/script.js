@@ -16,7 +16,7 @@ const addCardButton = profile.querySelector(".profile__add-button");
 const userName = profile.querySelector(".profile__user-name");
 const userAbout = profile.querySelector(".profile__user-about");
 
-const profilePopUp = document.querySelector(".popup_type_profile");
+const profilePopUp = document.querySelector(".pop-up_type_profile");
 const profilePopUpForm = profilePopUp.querySelector("form");
 const userNameInput = profilePopUpForm.querySelector(
   ".pop-up__input_type_user-name"
@@ -26,7 +26,7 @@ const userAboutInput = profilePopUpForm.querySelector(
 );
 const submitButtonprofilePopUp = profilePopUpForm.querySelector("button");
 
-const cardPopUp = document.querySelector(".popup_type_card-add");
+const cardPopUp = document.querySelector(".pop-up_type_card-add");
 const cardPopUpForm = cardPopUp.querySelector("form");
 const cardTitleInput = cardPopUpForm.querySelector(
   ".pop-up__input_type_card-title"
