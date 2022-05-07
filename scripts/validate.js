@@ -14,6 +14,15 @@ function hideInputError(formElement, inputElement, setupData) {
   errorElement.textContent = "";
 }
 
+function clearInputError(formElement, validationSetupData) {
+  const inputList = Array.from(
+    formElement.querySelectorAll(validationSetupData.inputSelector)
+  );
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, validationSetupData);
+  });
+}
+
 // ** Функция проверки валидности формы
 function checkInputValidity(formElement, inputElement, setupData) {
   if (!inputElement.validity.valid) {
@@ -29,20 +38,30 @@ function hasInvalidInput(inputList) {
   });
 }
 
+function enableSubmitButton(buttonElement, setupData) {
+  buttonElement.classList.remove(setupData.inactiveButtonClass);
+  buttonElement.removeAttribute("disabled");
+}
+
+function disableSubmitButton(buttonElement, setupData) {
+  buttonElement.classList.add(setupData.inactiveButtonClass);
+  buttonElement.setAttribute("disabled", true);
+}
+
 function toggleButtonState(inputList, buttonElement, setupData) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(setupData.inactiveButtonClass);
+    disableSubmitButton(buttonElement, setupData);
   } else {
-    buttonElement.classList.remove(setupData.inactiveButtonClass);
+    enableSubmitButton(buttonElement, setupData);
   }
 }
 
 function setEventListeners(formElement, setupData) {
   const inputList = Array.from(
-    formElement.querySelectorAll(`.${setupData.inputSelector}`)
+    formElement.querySelectorAll(setupData.inputSelector)
   );
   const buttonElement = formElement.querySelector(
-    `.${setupData.submitButtonSelector}`
+    setupData.submitButtonSelector
   );
   toggleButtonState(inputList, buttonElement, setupData);
   inputList.forEach((inputElement) => {
@@ -55,7 +74,7 @@ function setEventListeners(formElement, setupData) {
 
 function enableValidation(setupData) {
   const formList = Array.from(
-    document.querySelectorAll(`.${setupData.formSelector}`)
+    document.querySelectorAll(setupData.formSelector)
   );
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
