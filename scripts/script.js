@@ -40,10 +40,6 @@ const imagePopUp = document.querySelector(".pop-up_for-image");
 const imagePopUpImage = imagePopUp.querySelector(".pop-up__image");
 const imagePopUpTitel = imagePopUp.querySelector(".pop-up__image-title");
 
-const popUpCloseButtonsList = document.querySelectorAll(
-  ".pop-up__close-button"
-);
-
 const cardTemplate = document.querySelector("#card").content;
 const cardsConteiner = document.querySelector(".cards");
 
@@ -75,9 +71,7 @@ function clearPopUpForm(popUpElement) {
   }
 }
 
-function popUpCloseButtonHeandler(targetElement) {
-  const popUpElement = targetElement.closest(".popup_opened");
-
+function popUpCloseButtonHeandler(popUpElement) {
   clearPopUpForm(popUpElement);
   closePopUp(popUpElement);
 }
@@ -135,7 +129,8 @@ function createCard(cardData) {
     ".card__delete-button"
   );
 
-  cardElementImage.style.backgroundImage = `url('${cardData.link}')`;
+  cardElementImage.src = cardData.link;
+  cardElementImage.alt = cardData.name;
   cardElementTitel.textContent = cardData.name;
   cardElementLikeButton.addEventListener("click", likeButtonHandler);
   cardElementDeleteButton.addEventListener("click", deleteButtonHandler);
@@ -150,12 +145,6 @@ initialCards.forEach((cardData) =>
   addCard(cardsConteiner, createCard(cardData))
 );
 
-popUpCloseButtonsList.forEach(function (popUpCloseButtonElement) {
-  popUpCloseButtonElement.addEventListener("click", (evt) => {
-    popUpCloseButtonHeandler(evt.target);
-  });
-});
-
 editProfileButton.addEventListener("click", editProfileButtonHandler);
 profilePopUpForm.addEventListener("submit", profilePopUpFormHandler);
 addCardButton.addEventListener("click", function () {
@@ -166,8 +155,13 @@ cardPopUpForm.addEventListener("submit", cardPopUpFormHandler);
 
 popUpsList.forEach((popUpElement) => {
   popUpElement.addEventListener("mousedown", (evt) => {
-    if (evt.target === evt.currentTarget) {
-      popUpCloseButtonHeandler(evt.target);
+    const targetClassList = evt.target.classList;
+
+    if (
+      targetClassList.contains("pop-up") ||
+      targetClassList.contains("pop-up__close-button")
+    ) {
+      popUpCloseButtonHeandler(popUpElement);
     }
   });
 });
