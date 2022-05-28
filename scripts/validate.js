@@ -41,7 +41,7 @@ function hasInvalidInput(inputList) {
 function enableSubmitButton(buttonElement, setupData) {
   buttonElement.classList.remove(setupData.inactiveButtonClass);
   buttonElement.removeAttribute("disabled");
-}
+ }
 
 function disableSubmitButton(buttonElement, setupData) {
   buttonElement.classList.add(setupData.inactiveButtonClass);
