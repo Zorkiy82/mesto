@@ -1,4 +1,5 @@
-import {initialCards, Card} from './cards.js';
+import { initialCards, Card } from "./cards.js";
+import { FormValidator } from "./validate.js";
 
 const validationSetupData = {
   formSelector: ".page__form",
@@ -24,19 +25,17 @@ const userNameInput = profilePopUpForm.querySelector(
 const userAboutInput = profilePopUpForm.querySelector(
   ".pop-up__input_type_user-about"
 );
-const submitButtonprofilePopUp = profilePopUpForm.querySelector("button");
 
 const cardPopUp = document.querySelector(".pop-up_type_card-add");
 const cardPopUpForm = cardPopUp.querySelector("form");
 const cardTitleInput = cardPopUpForm.querySelector(
   ".pop-up__input_type_card-title"
 );
-
-const popUpsList = [profilePopUp, cardPopUp];
 const cardUrlInput = cardPopUpForm.querySelector(
   ".pop-up__input_type_image-URL"
 );
-const submitButtonCardPopUp = cardPopUpForm.querySelector("button");
+
+const popUpsList = [profilePopUp, cardPopUp];
 
 const cardsConteiner = document.querySelector(".cards");
 
@@ -46,7 +45,6 @@ function keydownHeandler(evt) {
     popUpCloseButtonHeandler(popUpElement);
   }
 }
-
 
 function closePopUp(popUpElement) {
   window.removeEventListener("keydown", keydownHeandler);
@@ -59,18 +57,21 @@ function openPopUp(popUpElement) {
 }
 
 function clearPopUpForm(popUpElement) {
-  const formElement = popUpElement.querySelector(
-    validationSetupData.formSelector
-  );
-
-  if (formElement) {
-    formElement.reset();
-    clearInputError(formElement, validationSetupData);
+  if (popUpElement.classList.contains("pop-up_type_profile")) {
+    profilePopUpForm.reset();
+    validationProfilePopUpForm.clearInputError();
+  } else if (popUpElement.classList.contains("pop-up_type_card-add")) {
+    cardPopUpForm.reset();
+    validationCardPopUpForm.clearInputError();
   }
 }
 
 function popUpCloseButtonHeandler(popUpElement) {
+  // Очищаем форму перед закрытием, т.к. на некоторых разрешениях,
+  // не сброшенные элементы ошибок, не дают нажать на кнопку удаления
+  // карточки (даже когда попап не виден на экране).
   clearPopUpForm(popUpElement);
+
   closePopUp(popUpElement);
 }
 
@@ -78,7 +79,7 @@ function editProfileButtonHandler() {
   userNameInput.value = userName.textContent;
   userAboutInput.value = userAbout.textContent;
   openPopUp(profilePopUp);
-  enableSubmitButton(submitButtonprofilePopUp, validationSetupData);
+  validationProfilePopUpForm.enableSubmitButton();
 }
 
 function profilePopUpFormHandler(event) {
@@ -94,21 +95,30 @@ function cardPopUpFormHandler() {
     link: cardUrlInput.value,
   };
 
-  const cardElement = new Card(CardData, '#card');
+  const cardElement = new Card(CardData, "#card");
   addCard(cardsConteiner, cardElement.createCard());
   closePopUp(cardPopUp);
   cardPopUpForm.reset();
-  disableSubmitButton(submitButtonCardPopUp, validationSetupData);
+  validationCardPopUpForm.disableSubmitButton();
 }
 
 function addCard(listElement, cardElement) {
   listElement.prepend(cardElement);
 }
-
-enableValidation(validationSetupData);
+cardPopUpForm;
+const validationProfilePopUpForm = new FormValidator(
+  validationSetupData,
+  profilePopUpForm
+);
+const validationCardPopUpForm = new FormValidator(
+  validationSetupData,
+  cardPopUpForm
+);
+validationProfilePopUpForm.enableValidation();
+validationCardPopUpForm.enableValidation();
 
 initialCards.forEach((cardData) => {
-  const cardElement = new Card(cardData, '#card');
+  const cardElement = new Card(cardData, "#card");
   addCard(cardsConteiner, cardElement.createCard());
 });
 
@@ -132,4 +142,3 @@ popUpsList.forEach((popUpElement) => {
     }
   });
 });
-
