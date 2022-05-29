@@ -18,7 +18,7 @@ class FormValidator {
     errorElement.textContent = "";
   }
 
-  clearInputError() {
+  clearInputErrors() {
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });

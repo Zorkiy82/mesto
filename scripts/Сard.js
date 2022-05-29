@@ -41,12 +41,12 @@ class Card {
     return document.querySelector(this._cardTemplateSelector);
   }
 
-  _likeHeandler() {
+  _handleLike() {
     this._elementLikeButton.classList.toggle("card__like_is-active");
     this._like = !this._like;
   }
 
-  _deleteButtonHandler() {
+  _handleDeleteButton() {
     this._element.remove();
   }
 
@@ -71,10 +71,10 @@ class Card {
 
   _setEventListeners() {
     this._elementLikeButton.addEventListener("click", () => {
-      this._likeHeandler();
+      this._handleLike();
     });
     this._elementDeleteButton.addEventListener("click", () => {
-      this._deleteButtonHandler();
+      this._handleDeleteButton();
     });
     this._elmentImage.addEventListener("click", () => {
       this._imagePopUpHandler();

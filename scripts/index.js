@@ -1,5 +1,5 @@
-import { initialCards, Card } from "./cards.js";
-import { FormValidator } from "./validate.js";
+import { initialCards, Card } from "./Сard.js";
+import { FormValidator } from "./FormValidator.js";
 
 const validationSetupData = {
   formSelector: ".page__form",
@@ -39,73 +39,63 @@ const popUpsList = [profilePopUp, cardPopUp];
 
 const cardsConteiner = document.querySelector(".cards");
 
-function keydownHeandler(evt) {
+function handleEscKey(evt) {
   if (evt.key === "Escape") {
     const popUpElement = document.querySelector(".popup_opened");
-    popUpCloseButtonHeandler(popUpElement);
+    closePopUp(popUpElement);
   }
 }
 
 function closePopUp(popUpElement) {
-  window.removeEventListener("keydown", keydownHeandler);
+  window.removeEventListener("keydown", handleEscKey);
   popUpElement.classList.remove("popup_opened");
 }
 
 function openPopUp(popUpElement) {
-  window.addEventListener("keydown", keydownHeandler);
+  window.addEventListener("keydown", handleEscKey);
   popUpElement.classList.add("popup_opened");
 }
 
-function clearPopUpForm(popUpElement) {
-  if (popUpElement.classList.contains("pop-up_type_profile")) {
-    profilePopUpForm.reset();
-    validationProfilePopUpForm.clearInputError();
-  } else if (popUpElement.classList.contains("pop-up_type_card-add")) {
-    cardPopUpForm.reset();
-    validationCardPopUpForm.clearInputError();
-  }
+function handleAddCardButton() {
+  cardPopUpForm.reset();
+  validationCardPopUpForm.clearInputErrors();
+  validationCardPopUpForm.disableSubmitButton();
+  openPopUp(cardPopUp);
 }
 
-function popUpCloseButtonHeandler(popUpElement) {
-  // Очищаем форму перед закрытием, т.к. на некоторых разрешениях,
-  // не сброшенные элементы ошибок, не дают нажать на кнопку удаления
-  // карточки (даже когда попап не виден на экране).
-  clearPopUpForm(popUpElement);
-
-  closePopUp(popUpElement);
-}
-
-function editProfileButtonHandler() {
+function handleEditProfileButton() {
   userNameInput.value = userName.textContent;
   userAboutInput.value = userAbout.textContent;
-  openPopUp(profilePopUp);
+  validationProfilePopUpForm.clearInputErrors();
   validationProfilePopUpForm.enableSubmitButton();
+  openPopUp(profilePopUp);
 }
 
-function profilePopUpFormHandler(event) {
+function handleProfilePopUpForm(event) {
   userName.textContent = userNameInput.value;
   userAbout.textContent = userAboutInput.value;
   closePopUp(profilePopUp);
-  profilePopUpForm.reset();
 }
 
-function cardPopUpFormHandler() {
-  const CardData = {
+function createCard(cardData) {
+  const cardElement = new Card(cardData, "#card");
+  return cardElement.createCard();
+}
+
+function handleCardPopUpForm() {
+  const cardElement = createCard({
     name: cardTitleInput.value,
     link: cardUrlInput.value,
-  };
+  });
 
-  const cardElement = new Card(CardData, "#card");
-  addCard(cardsConteiner, cardElement.createCard());
+  addCard(cardsConteiner, cardElement);
   closePopUp(cardPopUp);
-  cardPopUpForm.reset();
-  validationCardPopUpForm.disableSubmitButton();
 }
 
 function addCard(listElement, cardElement) {
   listElement.prepend(cardElement);
 }
-cardPopUpForm;
+// cardPopUpForm;
 const validationProfilePopUpForm = new FormValidator(
   validationSetupData,
   profilePopUpForm
@@ -118,17 +108,15 @@ validationProfilePopUpForm.enableValidation();
 validationCardPopUpForm.enableValidation();
 
 initialCards.forEach((cardData) => {
-  const cardElement = new Card(cardData, "#card");
-  addCard(cardsConteiner, cardElement.createCard());
+  const cardElement = createCard(cardData);
+  addCard(cardsConteiner, cardElement);
 });
 
-editProfileButton.addEventListener("click", editProfileButtonHandler);
-profilePopUpForm.addEventListener("submit", profilePopUpFormHandler);
-addCardButton.addEventListener("click", function () {
-  openPopUp(cardPopUp);
-});
+editProfileButton.addEventListener("click", handleEditProfileButton);
+profilePopUpForm.addEventListener("submit", handleProfilePopUpForm);
 
-cardPopUpForm.addEventListener("submit", cardPopUpFormHandler);
+addCardButton.addEventListener("click", handleAddCardButton);
+cardPopUpForm.addEventListener("submit", handleCardPopUpForm);
 
 popUpsList.forEach((popUpElement) => {
   popUpElement.addEventListener("mousedown", (evt) => {
@@ -138,7 +126,7 @@ popUpsList.forEach((popUpElement) => {
       targetClassList.contains("pop-up") ||
       targetClassList.contains("pop-up__close-button")
     ) {
-      popUpCloseButtonHeandler(popUpElement);
+      closePopUp(popUpElement);
     }
   });
 });
