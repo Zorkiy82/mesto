@@ -1,6 +1,8 @@
 import { initialCards, Card } from "./Сard.js";
 import { FormValidator } from "./FormValidator.js";
 
+// ---------------------------------------------------------------------------------------------------------
+
 const validationSetupData = {
   formSelector: ".page__form",
   inputSelector: ".pop-up__input",
@@ -39,9 +41,13 @@ const imagePopUp = document.querySelector(".pop-up_for-image");
 const imagePopUpImage = imagePopUp.querySelector(".pop-up__image");
 const imagePopUpTitel = imagePopUp.querySelector(".pop-up__image-title");
 
-const popUpsList = [profilePopUp, cardPopUp, imagePopUp];
+const popUpsList = document.querySelectorAll(".pop-up");
 
 const cardsConteiner = document.querySelector(".cards");
+
+const formValidators = {};
+
+// ---------------------------------------------------------------------------------------------------------
 
 function handleEscKey(evt) {
   if (evt.key === "Escape") {
@@ -62,21 +68,21 @@ function openPopUp(popUpElement) {
 
 function handleAddCardButton() {
   cardPopUpForm.reset();
-  validationCardPopUpForm.resetValidation();
-  validationCardPopUpForm.disableSubmitButton();
+  formValidators[cardPopUpForm.getAttribute("name")].resetValidation();
+  formValidators[cardPopUpForm.getAttribute("name")].disableSubmitButton();
   openPopUp(cardPopUp);
 }
 
 function handleEditProfileButton() {
   userNameInput.value = userName.textContent;
   userAboutInput.value = userAbout.textContent;
-  validationProfilePopUpForm.resetValidation();
-  validationProfilePopUpForm.enableSubmitButton();
+  formValidators[profilePopUpForm.getAttribute("name")].resetValidation();
+  formValidators[profilePopUpForm.getAttribute("name")].enableSubmitButton();
   openPopUp(profilePopUp);
 }
 
-function handleCardImageClick(link, title){
-  imagePopUpImage.src =link;
+function handleCardImageClick(link, title) {
+  imagePopUpImage.src = link;
   imagePopUpImage.alt = title;
   imagePopUpTitel.textContent = title;
   openPopUp(imagePopUp);
@@ -106,17 +112,22 @@ function handleCardPopUpForm() {
 function addCard(listElement, cardElement) {
   listElement.prepend(cardElement);
 }
-// cardPopUpForm;
-const validationProfilePopUpForm = new FormValidator(
-  validationSetupData,
-  profilePopUpForm
-);
-const validationCardPopUpForm = new FormValidator(
-  validationSetupData,
-  cardPopUpForm
-);
-validationProfilePopUpForm.enableValidation();
-validationCardPopUpForm.enableValidation();
+
+function enableValidation(setupData) {
+  const formList = Array.from(
+    document.querySelectorAll(setupData.formSelector)
+  );
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(setupData, formElement);
+    const formName = formElement.getAttribute("name");
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+}
+
+// ---------------------------------------------------------------------------------------------------------
+
+enableValidation(validationSetupData);
 
 initialCards.forEach((cardData) => {
   const cardElement = createCard(cardData);

@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -25,7 +25,7 @@ const initialCards = [
   },
 ];
 
-class Card {
+export class Card {
   constructor(cardData, cardTemplateSelector, handleElementImageClick) {
     this._title = cardData.name;
     this._link = cardData.link;
@@ -79,5 +79,3 @@ class Card {
     return this._element;
   }
 }
-
-export { initialCards, Card };
