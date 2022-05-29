@@ -25,15 +25,12 @@ const initialCards = [
   },
 ];
 
-const imagePopUp = document.querySelector(".pop-up_for-image");
-const imagePopUpImage = imagePopUp.querySelector(".pop-up__image");
-const imagePopUpTitel = imagePopUp.querySelector(".pop-up__image-title");
-
 class Card {
-  constructor(cardData, cardTemplateSelector) {
+  constructor(cardData, cardTemplateSelector, handleElementImageClick) {
     this._title = cardData.name;
     this._link = cardData.link;
     this._cardTemplateSelector = cardTemplateSelector;
+    this._handleElementImageClick = handleElementImageClick;
     this._like = false;
   }
 
@@ -50,25 +47,6 @@ class Card {
     this._element.remove();
   }
 
-  _openPopUp() {
-    window.addEventListener("keydown", this._keydownHeandler);
-    imagePopUp.classList.add("popup_opened");
-  }
-
-  _keydownHeandler(evt) {
-    if (evt.key === "Escape") {
-      window.removeEventListener("keydown", this._keydownHeandler);
-      imagePopUp.classList.remove("popup_opened");
-    }
-  }
-
-  _imagePopUpHandler() {
-    imagePopUpImage.src = this._link;
-    imagePopUpTitel.textContent = this._title;
-
-    this._openPopUp();
-  }
-
   _setEventListeners() {
     this._elementLikeButton.addEventListener("click", () => {
       this._handleLike();
@@ -77,17 +55,7 @@ class Card {
       this._handleDeleteButton();
     });
     this._elmentImage.addEventListener("click", () => {
-      this._imagePopUpHandler();
-    });
-    imagePopUp.addEventListener("mousedown", (evt) => {
-      const targetClassList = evt.target.classList;
-
-      if (
-        targetClassList.contains("pop-up") ||
-        targetClassList.contains("pop-up__close-button")
-      ) {
-        imagePopUp.classList.remove("popup_opened");
-      }
+      this._handleElementImageClick(this._link, this._title);
     });
   }
 
