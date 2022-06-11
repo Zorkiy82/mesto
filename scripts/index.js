@@ -1,6 +1,7 @@
 import { initialCards, Card } from "./Сard.js";
 import { FormValidator } from "./FormValidator.js";
 import { Section } from "./Section.js";
+import { Popup } from "./Popup.js";
 
 // ---------------------------------------------------------------------------------------------------------
 
@@ -159,3 +160,7 @@ popUpsList.forEach((popUpElement) => {
     }
   });
 });
+
+const profPop = new Popup (".pop-up_type_profile");
+profPop.setEventListeners();
+profPop.open();
