@@ -1,5 +1,6 @@
 import { initialCards, Card } from "./Сard.js";
 import { FormValidator } from "./FormValidator.js";
+import { Section } from "./Section.js";
 
 // ---------------------------------------------------------------------------------------------------------
 
@@ -43,7 +44,7 @@ const imagePopUpTitel = imagePopUp.querySelector(".pop-up__image-title");
 
 const popUpsList = document.querySelectorAll(".pop-up");
 
-const cardsConteiner = document.querySelector(".cards");
+const cardsConteinerSelector = ".cards";
 
 const formValidators = {};
 
@@ -105,12 +106,8 @@ function handleCardPopUpForm() {
     link: cardUrlInput.value,
   });
 
-  addCard(cardsConteiner, cardElement);
+  cardsConteiner.addItem(cardElement);
   closePopUp(cardPopUp);
-}
-
-function addCard(listElement, cardElement) {
-  listElement.prepend(cardElement);
 }
 
 function enableValidation(setupData) {
@@ -127,12 +124,22 @@ function enableValidation(setupData) {
 
 // ---------------------------------------------------------------------------------------------------------
 
-enableValidation(validationSetupData);
 
-initialCards.forEach((cardData) => {
-  const cardElement = createCard(cardData);
-  addCard(cardsConteiner, cardElement);
-});
+
+const cardsConteiner = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const cardElement = createCard(item);
+      cardsConteiner.addItem(cardElement);
+    },
+  },
+  cardsConteinerSelector
+);
+
+cardsConteiner.renderItems();
+
+enableValidation(validationSetupData);
 
 editProfileButton.addEventListener("click", handleEditProfileButton);
 profilePopUpForm.addEventListener("submit", handleProfilePopUpForm);
@@ -152,5 +159,3 @@ popUpsList.forEach((popUpElement) => {
     }
   });
 });
-
-
