@@ -152,3 +152,5 @@ popUpsList.forEach((popUpElement) => {
     }
   });
 });
+
+
