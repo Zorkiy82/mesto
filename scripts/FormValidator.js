@@ -66,9 +66,14 @@ export class FormValidator {
   }
 
   _setEventListeners() {
+    this._formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+
     this._inputList = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
     );
+
     this._buttonElement = this._formElement.querySelector(
       this._submitButtonSelector
     );
@@ -84,10 +89,6 @@ export class FormValidator {
   }
 
   enableValidation() {
-    this._formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-
     this._setEventListeners();
   }
 }
