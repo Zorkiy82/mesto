@@ -69,5 +69,5 @@ export {
   cardPopupForm,
   popupWithImageSelector,
   cardsConteinerSelector,
-  formValidators
+  formValidators,
 };

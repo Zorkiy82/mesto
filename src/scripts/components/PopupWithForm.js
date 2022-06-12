@@ -16,14 +16,12 @@ export class PopupWithForm extends Popup {
     return this._inputsValue;
   }
 
-  setInputValue(inputElementName, inputElementValue){
-    this._inputList.forEach(
-      (input) => {
-        if (input.name === inputElementName) {
-          input.value = inputElementValue;
-        }
+  setInputValue(inputElementName, inputElementValue) {
+    this._inputList.forEach((input) => {
+      if (input.name === inputElementName) {
+        input.value = inputElementValue;
       }
-    );
+    });
   }
 
   setEventListeners() {
