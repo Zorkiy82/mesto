@@ -1,42 +1,25 @@
-import { initialCards, Card } from "./Сard.js";
-import { FormValidator } from "./FormValidator.js";
-import { Section } from "./Section.js";
-import { PopupWithImage } from "./PopupWithImage.js";
-import { PopupWithForm } from "./PopupWithForm.js";
+import {
+  initialCards,
+  validationSetupData,
+  editProfileButton,
+  addCardButton,
+  userNameElementSelector,
+  userAboutElementSelector,
+  profilePopupSelector,
+  profilePopupForm,
+  cardPopupSelector,
+  cardPopupForm,
+  popupWithImageSelector,
+  cardsConteinerSelector,
+  formValidators,
+} from "../utils/constants.js";
 
-// ---------------------------------------------------------------------------------------------------------
-
-const validationSetupData = {
-  formSelector: ".page__form",
-  inputSelector: ".pop-up__input",
-  submitButtonSelector: ".pop-up__submit-button",
-  inactiveButtonClass: "pop-up__submit-button_disabled",
-  inputErrorClass: "pop-up__input_error",
-  errorClass: "pop-up__input-text-error_visible",
-};
-
-const profile = document.querySelector(".profile");
-const editProfileButton = profile.querySelector(".profile__edit-button");
-const addCardButton = profile.querySelector(".profile__add-button");
-
-const userNameElement = profile.querySelector(".profile__user-name");
-const userAboutElement = profile.querySelector(".profile__user-about");
-
-const profilePopupSelector = ".pop-up_type_profile";
-const profilePopupForm = document
-  .querySelector(profilePopupSelector)
-  .querySelector("form");
-
-const cardPopupSelector = ".pop-up_type_card-add";
-const cardPopupForm = document
-  .querySelector(cardPopupSelector)
-  .querySelector("form");
-
-const popupWithImageSelector = ".pop-up_for-image";
-
-const cardsConteinerSelector = ".cards";
-
-const formValidators = {};
+import { Card } from "../components/Сard.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { UserInfo } from "../components/UserInfo.js";
 
 // ---------------------------------------------------------------------------------------------------------
 
@@ -47,8 +30,9 @@ function handleAddCardButton() {
 }
 
 function handleEditProfileButton() {
-  profilePopup.setInputValue("userName",userNameElement.textContent);
-  profilePopup.setInputValue("userAbout",userAboutElement.textContent);
+  const userData = userInfo.getUserInfo();
+  profilePopup.setInputValue("userName", userData.nameText);
+  profilePopup.setInputValue("userAbout", userData.aboutText);
   formValidators[profilePopupForm.getAttribute("name")].resetValidation();
   formValidators[profilePopupForm.getAttribute("name")].enableSubmitButton();
   profilePopup.open();
@@ -59,8 +43,7 @@ function handleCardClick(link, title) {
 }
 
 function handleProfilePopupForm({ userName, userAbout }) {
-  userNameElement.textContent = userName;
-  userAboutElement.textContent = userAbout;
+  userInfo.setUserInfo({ nameText: userName, aboutText: userAbout });
   profilePopup.close();
 }
 
@@ -92,6 +75,12 @@ function enableValidation(setupData) {
 }
 
 // ---------------------------------------------------------------------------------------------------------
+
+const userInfo = new UserInfo({
+  nameSelector: userNameElementSelector,
+  aboutSelector: userAboutElementSelector,
+});
+
 const profilePopup = new PopupWithForm(
   profilePopupSelector,
   handleProfilePopupForm
@@ -102,6 +91,7 @@ const cardPopup = new PopupWithForm(cardPopupSelector, handleCardPopupForm);
 cardPopup.setEventListeners();
 
 const popupWithImage = new PopupWithImage(popupWithImageSelector);
+popupWithImage.setEventListeners();
 
 const cardsConteiner = new Section(
   {
