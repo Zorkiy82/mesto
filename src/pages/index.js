@@ -1,4 +1,4 @@
-import "./pages/index.css";
+import "./index.css";
 
 import {
   initialCards,
@@ -14,14 +14,14 @@ import {
   popupWithImageSelector,
   cardsConteinerSelector,
   formValidators,
-} from "./scripts/utils/constants.js";
+} from "../scripts/utils/constants.js";
 
-import { Card } from "./scripts/components/Сard.js";
-import { FormValidator } from "./scripts/components/FormValidator.js";
-import { Section } from "./scripts/components/Section.js";
-import { PopupWithImage } from "./scripts/components/PopupWithImage.js";
-import { PopupWithForm } from "./scripts/components/PopupWithForm.js";
-import { UserInfo } from "./scripts/components/UserInfo.js";
+import { Card } from "../scripts/components/Сard.js";
+import { FormValidator } from "../scripts/components/FormValidator.js";
+import { Section } from "../scripts/components/Section.js";
+import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
+import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
+import { UserInfo } from "../scripts/components/UserInfo.js";
 
 // ---------------------------------------------------------------------------------------------------------
 
