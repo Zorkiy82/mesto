@@ -48,12 +48,12 @@ function handleCardClick(link, title) {
 function handleProfilePopupForm({ userName, userAbout }) {
   api
     .patchUserInfo({ name: userName, about: userAbout })
-    .then((userData) => {
-      userInfo.setUserData(userData);
-    })
-    .catch((err) => {
-      alert(err);
-    });
+      .then((userData) => {
+        userInfo.setUserData(userData);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   profilePopup.close();
 }
 
@@ -63,13 +63,19 @@ function createCard(cardData) {
 }
 
 function handleCardPopupForm({ cardTitel, imageURL }) {
-  const cardElement = createCard({
-    name: cardTitel,
-    link: imageURL,
-  });
-
-  cardsConteiner.addItem(cardElement);
-  cardPopup.close();
+api
+  .postCardData({
+      name: cardTitel,
+      link: imageURL,
+    })
+    .then((cardData) => {
+      const cardElement = createCard(cardData);
+      cardsConteiner.addItem(cardElement);
+      cardPopup.close();
+    })
+    .catch((err) => {
+      alert(err);
+    });
 }
 
 function enableValidation(setupData) {
@@ -85,7 +91,6 @@ function enableValidation(setupData) {
 }
 
 // ---------------------------------------------------------------------------------------------------------
-// let initialCards2 = [];
 const api = new Api(fetchSetupData);
 
 const userInfo = new UserInfo({
@@ -130,7 +135,7 @@ const cardsConteiner = new Section(
 api
   .getCardsArray()
   .then((cardsArray) => {
-    cardsConteiner.renderItems(cardsArray);
+    cardsConteiner.renderItems(cardsArray.reverse());
   })
   .catch((err) => {
     alert(err);

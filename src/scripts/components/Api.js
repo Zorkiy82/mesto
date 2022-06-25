@@ -17,9 +17,9 @@ export class Api{
     )
   }
 
-  _basePatchMethod(addString,jsonObject){
+  _basePatchOrPostMethod(addString,method,jsonObject){
     return fetch(`${this._baseUrl}${addString}`,{
-      method: 'PATCH',
+      method: method,
       headers: this._headers,
       body: JSON.stringify(jsonObject)
     })
@@ -41,6 +41,12 @@ export class Api{
   }
 
   patchUserInfo(userData){
-    return this._basePatchMethod('/users/me',userData);
+    return this._basePatchOrPostMethod('/users/me','PATCH',userData);
   }
+
+  postCardData(cardData){
+    return this._basePatchOrPostMethod('/cards','POST',cardData);
+  }
+
+
 }
