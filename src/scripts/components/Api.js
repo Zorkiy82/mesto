@@ -2,46 +2,45 @@ export class Api{
   constructor(options){
     this._baseUrl = options.baseUrl;
     this._token = options.headers.authorization;
+    this._headers = options.headers;
   }
 
-  // getBaseOptions(){
-  //   alert(this._baseUrl);
-  //   alert(JSON.stringify(this._headers));
-  // }
-_baseGetMetod(addString){
-  return fetch(`${this._baseUrl}${addString}`,{headers: {
-    authorization: this._token}})
-    .then(res => {
-      if (res.ok) {
-        return res.json()
+  _baseGetMethod(addString){
+    return fetch(`${this._baseUrl}${addString}`,{headers: {
+      authorization: this._token}})
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       }
+    )
+  }
 
-      return Promise.reject(`Ошибка: ${res.status}`);
+  _basePatchMethod(addString,jsonObject){
+    return fetch(`${this._baseUrl}${addString}`,{
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(jsonObject)
     })
-}
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    )
+  }
 
   getUserInfo(){
-    return this._baseGetMetod('/users/me');
+    return this._baseGetMethod('/users/me');
   }
 
   getCardsArray(){
-    return this._baseGetMetod('/cards');
-
+    return this._baseGetMethod('/cards');
   }
 
-  // getInitialCards() {
-  //   return fetch('https://mesto.nomoreparties.co/v1/cohort-42/cards', {
-  //     headers: {
-  //       authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6'
-  //     }
-  //   })
-  //     .then(res => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-
-  //       // если ошибка, отклоняем промис
-  //       return Promise.reject(`Ошибка: ${res.status}`);
-  //     });
-  // }
+  patchUserInfo(userData){
+    return this._basePatchMethod('/users/me',userData);
+  }
 }

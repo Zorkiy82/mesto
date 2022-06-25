@@ -2,7 +2,6 @@ import "./index.css";
 
 import {
   fetchSetupData,
-  initialCards,
   validationSetupData,
   editProfileButton,
   addCardButton,
@@ -47,7 +46,14 @@ function handleCardClick(link, title) {
 }
 
 function handleProfilePopupForm({ userName, userAbout }) {
-  userInfo.setUserInfo({ nameText: userName, aboutText: userAbout });
+  api
+    .patchUserInfo({ name: userName, about: userAbout })
+    .then((userData) => {
+      userInfo.setUserData(userData);
+    })
+    .catch((err) => {
+      alert(err);
+    });
   profilePopup.close();
 }
 
@@ -79,13 +85,13 @@ function enableValidation(setupData) {
 }
 
 // ---------------------------------------------------------------------------------------------------------
-let initialCards2 = [];
+// let initialCards2 = [];
 const api = new Api(fetchSetupData);
 
 const userInfo = new UserInfo({
   nameSelector: userNameElementSelector,
   aboutSelector: userAboutElementSelector,
-  avatarSelector: userAvatarElementSelector
+  avatarSelector: userAvatarElementSelector,
 });
 
 api
