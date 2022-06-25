@@ -1,4 +1,12 @@
-const initialCards = [
+const fetchSetupData = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44',
+  headers: {
+    authorization: '113896b8-685b-4e8f-b932-f30a44a399cc',
+    'Content-Type': 'application/json'
+  }
+}
+
+let initialCards = [
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -39,6 +47,7 @@ const addCardButton = document.querySelector(".profile__add-button");
 
 const userNameElementSelector = ".profile__user-name";
 const userAboutElementSelector = ".profile__user-about";
+const userAvatarElementSelector = ".profile__user-avatar";
 
 const profilePopupSelector = ".pop-up_type_profile";
 const profilePopupForm = document
@@ -57,12 +66,14 @@ const cardsConteinerSelector = ".cards";
 const formValidators = {};
 
 export {
+  fetchSetupData,
   initialCards,
   validationSetupData,
   editProfileButton,
   addCardButton,
   userNameElementSelector,
   userAboutElementSelector,
+  userAvatarElementSelector,
   profilePopupSelector,
   profilePopupForm,
   cardPopupSelector,

@@ -1,12 +1,14 @@
 import "./index.css";
 
 import {
+  fetchSetupData,
   initialCards,
   validationSetupData,
   editProfileButton,
   addCardButton,
   userNameElementSelector,
   userAboutElementSelector,
+  userAvatarElementSelector,
   profilePopupSelector,
   profilePopupForm,
   cardPopupSelector,
@@ -15,7 +17,7 @@ import {
   cardsConteinerSelector,
   formValidators,
 } from "../scripts/utils/constants.js";
-
+import { Api } from "../scripts/components/Api";
 import { Card } from "../scripts/components/Сard.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
@@ -77,11 +79,25 @@ function enableValidation(setupData) {
 }
 
 // ---------------------------------------------------------------------------------------------------------
+let initialCards2 = [];
+const api = new Api(fetchSetupData);
 
 const userInfo = new UserInfo({
   nameSelector: userNameElementSelector,
   aboutSelector: userAboutElementSelector,
+  avatarSelector: userAvatarElementSelector
 });
+
+api
+  .getUserInfo()
+  .then((userData) => {
+    userInfo.setUserData(userData);
+  })
+  .catch((err) => {
+    alert(err);
+  });
+
+
 
 const profilePopup = new PopupWithForm(
   profilePopupSelector,
@@ -97,7 +113,6 @@ popupWithImage.setEventListeners();
 
 const cardsConteiner = new Section(
   {
-    items: initialCards,
     renderer: (item) => {
       const cardElement = createCard(item);
       cardsConteiner.addItem(cardElement);
@@ -106,7 +121,14 @@ const cardsConteiner = new Section(
   cardsConteinerSelector
 );
 
-cardsConteiner.renderItems();
+api
+  .getCardsArray()
+  .then((cardsArray) => {
+    cardsConteiner.renderItems(cardsArray);
+  })
+  .catch((err) => {
+    alert(err);
+  });
 
 enableValidation(validationSetupData);
 
