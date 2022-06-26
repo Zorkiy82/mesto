@@ -13,6 +13,7 @@ import {
   cardPopupSelector,
   cardPopupForm,
   popupWithImageSelector,
+  areYouSurePopupSelector,
   cardsConteinerSelector,
   formValidators,
 } from "../scripts/utils/constants.js";
@@ -78,6 +79,11 @@ api
     });
 }
 
+function handleAreYouSurePopupForm(){
+  console.log("Начинаем удалять карточку");
+}
+
+
 function enableValidation(setupData) {
   const formList = Array.from(
     document.querySelectorAll(setupData.formSelector)
@@ -140,6 +146,10 @@ api
   .catch((err) => {
     alert(err);
   });
+
+  const areYouSurePopup = new PopupWithForm(areYouSurePopupSelector,handleAreYouSurePopupForm);
+  areYouSurePopup.setEventListeners();
+  // areYouSurePopup.open();
 
 enableValidation(validationSetupData);
 

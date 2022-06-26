@@ -143,20 +143,35 @@
       </div>
     </div>
 
+    <div class="pop-up pop-up_type_are-you-sure">
+      <div class="pop-up__window pop-up__window_type_warning">
+        <h2 class="pop-up__title">Вы уверены?</h2>
+        <form class="page__form" name="areYouSureForm" method="POST">
+          <button class="pop-up__submit-button page__button" type="submit">
+            Да
+          </button>
+        </form>
+        <button
+          class="pop-up__close-button page__button"
+          type="button"
+          aria-label="Закрыть"
+        ></button>
+      </div>
+    </div>
+
     <template id="card">
       <article class="card" id="templateCard">
         <img class="card__image" src="#" alt="" />
         <div class="card__description">
           <h2 class="card__title"></h2>
-            <div class="card__like-container">
-              <button
+          <div class="card__like-container">
+            <button
               class="card__like"
               type="button"
               aria-label="Лайк в форме сердечка"
-              ></button>
-              <p class="card__likes-counter">0</p>
-            </div>
-
+            ></button>
+            <p class="card__likes-counter">0</p>
+          </div>
         </div>
         <button
           class="card__delete-button page__button"

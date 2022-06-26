@@ -61,6 +61,8 @@ const cardPopupForm = document
 
 const popupWithImageSelector = ".pop-up_for-image";
 
+const areYouSurePopupSelector = ".pop-up_type_are-you-sure"
+
 const cardsConteinerSelector = ".cards";
 
 const formValidators = {};
@@ -79,6 +81,7 @@ export {
   cardPopupSelector,
   cardPopupForm,
   popupWithImageSelector,
+  areYouSurePopupSelector,
   cardsConteinerSelector,
   formValidators,
 };

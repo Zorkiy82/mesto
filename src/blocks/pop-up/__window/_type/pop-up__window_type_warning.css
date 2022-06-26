@@ -1,0 +1,8 @@
+.pop-up__window_type_warning{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 36px;
+  min-height: 181px;
+
+}
