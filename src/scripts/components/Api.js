@@ -50,4 +50,12 @@ export class Api {
   deleteCard(cardId) {
     return this._basePatchOrPostMethod(`/cards/${cardId}`, "DELETE", {});
   }
+
+  setLike(cardId) {
+    return this._basePatchOrPostMethod(`/cards/${cardId}/likes`, "PUT", {});
+  }
+
+  deleteLike(cardId) {
+    return this._basePatchOrPostMethod(`/cards/${cardId}/likes`, "DELETE", {});
+  }
 }

@@ -15,7 +15,7 @@ import {
   popupWithImageSelector,
   areYouSurePopupSelector,
   cardsConteinerSelector,
-  formValidators
+  formValidators,
 } from "../scripts/utils/constants.js";
 
 import { Api } from "../scripts/components/Api";
@@ -50,24 +50,31 @@ function handleCardClick(link, title) {
 function handleProfilePopupForm({ userName, userAbout }) {
   api
     .patchUserInfo({ name: userName, about: userAbout })
-      .then((userData) => {
-        userInfo.setUserData(userData);
-      })
-      .catch((err) => {
-        alert(err);
-      });
+    .then((userData) => {
+      userInfo.setUserData(userData);
+    })
+    .catch((err) => {
+      alert(err);
+    });
   profilePopup.close();
 }
 
 function createCard(cardData) {
-  const cardElement = new Card(cardData, "#card", handleCardClick, userInfo.getUserId(),handleDeleteCardButton);
+  const cardElement = new Card(
+    cardData,
+    "#card",
+    handleCardClick,
+    userInfo.getUserId(),
+    handleDeleteCardButton,
+    handleLikeButton
+  );
 
   return cardElement.createCard();
 }
 
 function handleCardPopupForm({ cardTitel, imageURL }) {
-api
-  .postCardData({
+  api
+    .postCardData({
       name: cardTitel,
       link: imageURL,
     })
@@ -81,31 +88,49 @@ api
     });
 }
 
-
-
-function handleDeleteCardButton(cardObject){
+function handleDeleteCardButton(cardObject) {
   areYouSurePopup.cardForDelete = cardObject;
   areYouSurePopup.open();
-
 }
 
-function handleAreYouSurePopupForm(){
+function handleAreYouSurePopupForm() {
   api
-  .deleteCard(areYouSurePopup.cardForDelete._id)
-    .then((cardData) => {
-      areYouSurePopup.close();
+    .deleteCard(areYouSurePopup.cardForDelete._id)
+    .then(() => {
       areYouSurePopup.cardForDelete.deleteElementCard();
-      areYouSurePopup.cardForDelete = {};
     })
     .catch((err) => {
+      alert(err);
+    })
+    .finally(() => {
       areYouSurePopup.close();
       areYouSurePopup.cardForDelete = {};
-      alert(err);
     });
 }
 
-
-
+function handleLikeButton(cardObject) {
+  if (cardObject._like) {
+    //Нужно удалить like
+    api
+      .deleteLike(cardObject._id)
+      .then((cardData) => {
+        cardObject.updateLikeState(cardData.likes);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  } else {
+    //Нужно поставить like
+    api
+      .setLike(cardObject._id)
+      .then((cardData) => {
+        cardObject.updateLikeState(cardData.likes);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+}
 
 function enableValidation(setupData) {
   const formList = Array.from(
@@ -136,8 +161,6 @@ api
   .catch((err) => {
     alert(err);
   });
-
-
 
 const profilePopup = new PopupWithForm(
   profilePopupSelector,
@@ -170,7 +193,10 @@ api
     alert(err);
   });
 
-const areYouSurePopup = new PopupWithForm(areYouSurePopupSelector,handleAreYouSurePopupForm);
+const areYouSurePopup = new PopupWithForm(
+  areYouSurePopupSelector,
+  handleAreYouSurePopupForm
+);
 areYouSurePopup.setEventListeners();
 
 enableValidation(validationSetupData);
