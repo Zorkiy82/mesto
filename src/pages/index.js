@@ -15,8 +15,9 @@ import {
   popupWithImageSelector,
   areYouSurePopupSelector,
   cardsConteinerSelector,
-  formValidators,
+  formValidators
 } from "../scripts/utils/constants.js";
+
 import { Api } from "../scripts/components/Api";
 import { Card } from "../scripts/components/Сard.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
@@ -59,7 +60,8 @@ function handleProfilePopupForm({ userName, userAbout }) {
 }
 
 function createCard(cardData) {
-  const cardElement = new Card(cardData, "#card", handleCardClick);
+  const cardElement = new Card(cardData, "#card", handleCardClick, userInfo.getUserId(),handleDeleteCardButton);
+
   return cardElement.createCard();
 }
 
@@ -79,9 +81,30 @@ api
     });
 }
 
-function handleAreYouSurePopupForm(){
-  console.log("Начинаем удалять карточку");
+
+
+function handleDeleteCardButton(cardObject){
+  areYouSurePopup.cardForDelete = cardObject;
+  areYouSurePopup.open();
+
 }
+
+function handleAreYouSurePopupForm(){
+  api
+  .deleteCard(areYouSurePopup.cardForDelete._id)
+    .then((cardData) => {
+      areYouSurePopup.close();
+      areYouSurePopup.cardForDelete.deleteElementCard();
+      areYouSurePopup.cardForDelete = {};
+    })
+    .catch((err) => {
+      areYouSurePopup.close();
+      areYouSurePopup.cardForDelete = {};
+      alert(err);
+    });
+}
+
+
 
 
 function enableValidation(setupData) {
@@ -147,9 +170,8 @@ api
     alert(err);
   });
 
-  const areYouSurePopup = new PopupWithForm(areYouSurePopupSelector,handleAreYouSurePopupForm);
-  areYouSurePopup.setEventListeners();
-  // areYouSurePopup.open();
+const areYouSurePopup = new PopupWithForm(areYouSurePopupSelector,handleAreYouSurePopupForm);
+areYouSurePopup.setEventListeners();
 
 enableValidation(validationSetupData);
 

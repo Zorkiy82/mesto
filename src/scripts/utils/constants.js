@@ -83,5 +83,5 @@ export {
   popupWithImageSelector,
   areYouSurePopupSelector,
   cardsConteinerSelector,
-  formValidators,
+  formValidators
 };
