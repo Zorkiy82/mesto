@@ -59,6 +59,7 @@ function handleCardClick(link, title) {
 }
 
 function handleProfilePopupForm({ userName, userAbout }) {
+  profilePopup.setButtonText("Сохранение...");
   api
     .patchUserInfo({ name: userName, about: userAbout })
     .then((userData) => {
@@ -67,6 +68,9 @@ function handleProfilePopupForm({ userName, userAbout }) {
     })
     .catch((err) => {
       alert(err);
+    })
+    .finally(() => {
+      profilePopup.setButtonText("Сохранить");
     });
 }
 
@@ -84,6 +88,7 @@ function createCard(cardData) {
 }
 
 function handleCardPopupForm({ cardTitel, imageURL }) {
+  cardPopup.setButtonText("Сохранение...");
   api
     .postCardData({
       name: cardTitel,
@@ -96,6 +101,9 @@ function handleCardPopupForm({ cardTitel, imageURL }) {
     })
     .catch((err) => {
       alert(err);
+    })
+    .finally(() => {
+      cardPopup.setButtonText("Создать");
     });
 }
 
@@ -105,6 +113,7 @@ function handleDeleteCardButton(cardObject) {
 }
 
 function handleAreYouSurePopupForm() {
+  areYouSurePopup.setButtonText("Удаление...");
   api
     .deleteCard(areYouSurePopup.cardForDelete._id)
     .then(() => {
@@ -114,12 +123,14 @@ function handleAreYouSurePopupForm() {
       alert(err);
     })
     .finally(() => {
+      areYouSurePopup.setButtonText("Да");
       areYouSurePopup.close();
       areYouSurePopup.cardForDelete = {};
     });
 }
 
 function handleEditAvatarPopupForm(data) {
+  editAvatarPopup.setButtonText("Сохранение...");
   api
     .patchUserAvatar({ avatar: data.avatarURL })
     .then((userData) => {
@@ -128,6 +139,9 @@ function handleEditAvatarPopupForm(data) {
     })
     .catch((err) => {
       alert(err);
+    })
+    .finally(() => {
+      editAvatarPopup.setButtonText("Сохранить");
     });
 }
 

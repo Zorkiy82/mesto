@@ -77,7 +77,6 @@ const formValidators = {};
 
 export {
   fetchSetupData,
-  // initialCards,
   validationSetupData,
   editProfileButton,
   addCardButton,
