@@ -58,22 +58,6 @@ function handleCardClick(link, title) {
   popupWithImage.open({ link: link, title: title });
 }
 
-function handleProfilePopupForm({ userName, userAbout }) {
-  profilePopup.setButtonText("Сохранение...");
-  api
-    .patchUserInfo({ name: userName, about: userAbout })
-    .then((userData) => {
-      userInfo.setUserData(userData);
-      profilePopup.close();
-    })
-    .catch((err) => {
-      alert(err);
-    })
-    .finally(() => {
-      profilePopup.setButtonText("Сохранить");
-    });
-}
-
 function createCard(cardData) {
   const cardElement = new Card(
     cardData,
@@ -107,9 +91,36 @@ function handleCardPopupForm({ cardTitel, imageURL }) {
     });
 }
 
-function handleDeleteCardButton(cardObject) {
-  areYouSurePopup.cardForDelete = cardObject;
-  areYouSurePopup.open();
+function handleProfilePopupForm({ userName, userAbout }) {
+  profilePopup.setButtonText("Сохранение...");
+  api
+    .patchUserInfo({ name: userName, about: userAbout })
+    .then((userData) => {
+      userInfo.setUserData(userData);
+      profilePopup.close();
+    })
+    .catch((err) => {
+      alert(err);
+    })
+    .finally(() => {
+      profilePopup.setButtonText("Сохранить");
+    });
+}
+
+function handleEditAvatarPopupForm(data) {
+  editAvatarPopup.setButtonText("Сохранение...");
+  api
+    .patchUserAvatar({ avatar: data.avatarURL })
+    .then((userData) => {
+      userInfo.setUserData(userData);
+      editAvatarPopup.close();
+    })
+    .catch((err) => {
+      alert(err);
+    })
+    .finally(() => {
+      editAvatarPopup.setButtonText("Сохранить");
+    });
 }
 
 function handleAreYouSurePopupForm() {
@@ -129,20 +140,9 @@ function handleAreYouSurePopupForm() {
     });
 }
 
-function handleEditAvatarPopupForm(data) {
-  editAvatarPopup.setButtonText("Сохранение...");
-  api
-    .patchUserAvatar({ avatar: data.avatarURL })
-    .then((userData) => {
-      userInfo.setUserData(userData);
-      editAvatarPopup.close();
-    })
-    .catch((err) => {
-      alert(err);
-    })
-    .finally(() => {
-      editAvatarPopup.setButtonText("Сохранить");
-    });
+function handleDeleteCardButton(cardObject) {
+  areYouSurePopup.cardForDelete = cardObject;
+  areYouSurePopup.open();
 }
 
 function handleLikeButton(cardObject) {
