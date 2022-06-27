@@ -1,10 +1,12 @@
 const fetchSetupData = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44',
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-44",
   headers: {
-    authorization: '113896b8-685b-4e8f-b932-f30a44a399cc',
-    'Content-Type': 'application/json'
-  }
-}
+    authorization: "113896b8-685b-4e8f-b932-f30a44a399cc",
+    "Content-Type": "application/json",
+  },
+};
+
+// https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg
 
 // let initialCards = [
 //   {
@@ -44,6 +46,7 @@ const validationSetupData = {
 
 const editProfileButton = document.querySelector(".profile__edit-button");
 const addCardButton = document.querySelector(".profile__add-button");
+const editAvatarButton = document.querySelector(".profile__avatar-overlay");
 
 const userNameElementSelector = ".profile__user-name";
 const userAboutElementSelector = ".profile__user-about";
@@ -61,7 +64,12 @@ const cardPopupForm = document
 
 const popupWithImageSelector = ".pop-up_for-image";
 
-const areYouSurePopupSelector = ".pop-up_type_are-you-sure"
+const areYouSurePopupSelector = ".pop-up_type_are-you-sure";
+
+const editAvatarPopupSelector = ".pop-up_type_edit-avatar";
+const editAvatarPopupForm = document
+  .querySelector(editAvatarPopupSelector)
+  .querySelector("form");
 
 const cardsConteinerSelector = ".cards";
 
@@ -73,6 +81,7 @@ export {
   validationSetupData,
   editProfileButton,
   addCardButton,
+  editAvatarButton,
   userNameElementSelector,
   userAboutElementSelector,
   userAvatarElementSelector,
@@ -82,6 +91,8 @@ export {
   cardPopupForm,
   popupWithImageSelector,
   areYouSurePopupSelector,
+  editAvatarPopupSelector,
+  editAvatarPopupForm,
   cardsConteinerSelector,
-  formValidators
+  formValidators,
 };

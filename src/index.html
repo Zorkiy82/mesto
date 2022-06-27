@@ -14,11 +14,18 @@
     <main class="main">
       <section class="profile">
         <div class="profile__user-card">
-          <img
-            src="<%=require('./images/user-avatar.svg')%>"
-            alt="Аватар пользователя"
-            class="profile__user-avatar"
-          />
+          <div class="profile__avatar-container">
+            <img
+              src="<%=require('./images/user-avatar.svg')%>"
+              alt="Аватар пользователя"
+              class="profile__user-avatar"
+            />
+            <button
+              class="profile__avatar-overlay page__button"
+              type="button"
+              aria-label="Изменить аватар пользователя"
+            ></button>
+          </div>
 
           <div class="profile__user-info">
             <div class="profile__user-info-inner-container">
@@ -149,6 +156,38 @@
         <form class="page__form" name="areYouSureForm" method="POST">
           <button class="pop-up__submit-button page__button" type="submit">
             Да
+          </button>
+        </form>
+        <button
+          class="pop-up__close-button page__button"
+          type="button"
+          aria-label="Закрыть"
+        ></button>
+      </div>
+    </div>
+
+    <div class="pop-up pop-up_type_edit-avatar">
+      <div class="pop-up__window pop-up__window_type_warning">
+        <h2 class="pop-up__title">Обновить аватар</h2>
+        <form class="page__form" name="editAvatar" method="POST">
+          <div
+            class="pop-up__error-container pop-up__error-container_type_one-input"
+          ></div>
+          <input
+            class="pop-up__input pop-up__input_type_avatar-URL"
+            name="avatarURL"
+            id="avatar-url"
+            type="url"
+            placeholder="Ссылка на картинку"
+            required
+          />
+          <div
+            class="pop-up__error-container pop-up__error-container_type_one-input"
+          >
+            <span class="pop-up__input-text-error avatar-url-error"></span>
+          </div>
+          <button class="pop-up__submit-button page__button" type="submit">
+            Сохранить
           </button>
         </form>
         <button

@@ -8,20 +8,19 @@ export class UserInfo {
   getUserInfo() {
     const nameText = this._userNameElement.textContent;
     const aboutText = this._userAboutElement.textContent;
+    const avatarUrl = this._userAvatarElement.src;
 
-    return { nameText: nameText, aboutText: aboutText };
+    return { nameText: nameText, aboutText: aboutText, avatarUrl: avatarUrl };
   }
 
-  setUserData(userData){
+  setUserData(userData) {
     this._userAvatarElement.src = userData.avatar;
     this._userNameElement.textContent = userData.name;
     this._userAboutElement.textContent = userData.about;
     this._id = userData._id;
   }
 
-  getUserId(){
+  getUserId() {
     return this._id;
   }
-
-
 }

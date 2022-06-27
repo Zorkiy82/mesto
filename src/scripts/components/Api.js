@@ -43,6 +43,10 @@ export class Api {
     return this._basePatchOrPostMethod("/users/me", "PATCH", userData);
   }
 
+  patchUserAvatar(userData) {
+    return this._basePatchOrPostMethod("/users/me/avatar", "PATCH", userData);
+  }
+
   postCardData(cardData) {
     return this._basePatchOrPostMethod("/cards", "POST", cardData);
   }

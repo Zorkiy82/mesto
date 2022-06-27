@@ -5,6 +5,7 @@ import {
   validationSetupData,
   editProfileButton,
   addCardButton,
+  editAvatarButton,
   userNameElementSelector,
   userAboutElementSelector,
   userAvatarElementSelector,
@@ -14,6 +15,8 @@ import {
   cardPopupForm,
   popupWithImageSelector,
   areYouSurePopupSelector,
+  editAvatarPopupSelector,
+  editAvatarPopupForm,
   cardsConteinerSelector,
   formValidators,
 } from "../scripts/utils/constants.js";
@@ -43,6 +46,14 @@ function handleEditProfileButton() {
   profilePopup.open();
 }
 
+function handleEditAvatarButton() {
+  const userData = userInfo.getUserInfo();
+  editAvatarPopup.setInputValue("avatarURL", userData.avatarUrl);
+  formValidators[editAvatarPopupForm.getAttribute("name")].resetValidation();
+  formValidators[editAvatarPopupForm.getAttribute("name")].enableSubmitButton();
+  editAvatarPopup.open();
+}
+
 function handleCardClick(link, title) {
   popupWithImage.open({ link: link, title: title });
 }
@@ -52,11 +63,11 @@ function handleProfilePopupForm({ userName, userAbout }) {
     .patchUserInfo({ name: userName, about: userAbout })
     .then((userData) => {
       userInfo.setUserData(userData);
+      profilePopup.close();
     })
     .catch((err) => {
       alert(err);
     });
-  profilePopup.close();
 }
 
 function createCard(cardData) {
@@ -108,9 +119,20 @@ function handleAreYouSurePopupForm() {
     });
 }
 
+function handleEditAvatarPopupForm(data) {
+  api
+    .patchUserAvatar({ avatar: data.avatarURL })
+    .then((userData) => {
+      userInfo.setUserData(userData);
+      editAvatarPopup.close();
+    })
+    .catch((err) => {
+      alert(err);
+    });
+}
+
 function handleLikeButton(cardObject) {
   if (cardObject._like) {
-    //Нужно удалить like
     api
       .deleteLike(cardObject._id)
       .then((cardData) => {
@@ -120,7 +142,6 @@ function handleLikeButton(cardObject) {
         alert(err);
       });
   } else {
-    //Нужно поставить like
     api
       .setLike(cardObject._id)
       .then((cardData) => {
@@ -174,6 +195,12 @@ cardPopup.setEventListeners();
 const popupWithImage = new PopupWithImage(popupWithImageSelector);
 popupWithImage.setEventListeners();
 
+const editAvatarPopup = new PopupWithForm(
+  editAvatarPopupSelector,
+  handleEditAvatarPopupForm
+);
+editAvatarPopup.setEventListeners();
+
 const cardsConteiner = new Section(
   {
     renderer: (item) => {
@@ -203,3 +230,4 @@ enableValidation(validationSetupData);
 
 editProfileButton.addEventListener("click", handleEditProfileButton);
 addCardButton.addEventListener("click", handleAddCardButton);
+editAvatarButton.addEventListener("click", handleEditAvatarButton);
