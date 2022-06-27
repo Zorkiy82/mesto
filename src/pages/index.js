@@ -188,15 +188,6 @@ const userInfo = new UserInfo({
   avatarSelector: userAvatarElementSelector,
 });
 
-api
-  .getUserInfo()
-  .then((userData) => {
-    userInfo.setUserData(userData);
-  })
-  .catch((err) => {
-    alert(err);
-  });
-
 const profilePopup = new PopupWithForm(
   profilePopupSelector,
   handleProfilePopupForm
@@ -225,15 +216,6 @@ const cardsConteiner = new Section(
   cardsConteinerSelector
 );
 
-api
-  .getCardsArray()
-  .then((cardsArray) => {
-    cardsConteiner.renderItems(cardsArray.reverse());
-  })
-  .catch((err) => {
-    alert(err);
-  });
-
 const areYouSurePopup = new PopupWithForm(
   areYouSurePopupSelector,
   handleAreYouSurePopupForm
@@ -245,3 +227,12 @@ enableValidation(validationSetupData);
 editProfileButton.addEventListener("click", handleEditProfileButton);
 addCardButton.addEventListener("click", handleAddCardButton);
 editAvatarButton.addEventListener("click", handleEditAvatarButton);
+
+Promise.all([api.getUserInfo(), api.getCardsArray()])
+  .then((data) => {
+    userInfo.setUserData(data[0]);
+    cardsConteiner.reverseRenderItems(data[1]);
+  })
+  .catch((err) => {
+    alert(err);
+  });

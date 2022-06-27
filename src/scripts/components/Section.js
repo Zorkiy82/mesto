@@ -4,11 +4,6 @@ export class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  // setItems(items){
-  //   this._items = items;
-  // }
-
-
   addItem(element) {
     this._container.prepend(element);
   }
@@ -17,5 +12,11 @@ export class Section {
     items.forEach((item) => {
       this._renderer(item);
     });
+  }
+
+  reverseRenderItems(items) {
+    for (let i = items.length - 1; i >= 0; --i) {
+      this._renderer(items[i]);
+    }
   }
 }
