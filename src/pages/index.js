@@ -27,6 +27,7 @@ import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
 import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
 import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
+import { PopupWithConfirmation } from "../scripts/components/PopupWithConfirmation";
 import { UserInfo } from "../scripts/components/UserInfo.js";
 
 // ---------------------------------------------------------------------------------------------------------
@@ -47,8 +48,6 @@ function handleEditProfileButton() {
 }
 
 function handleEditAvatarButton() {
-  const userData = userInfo.getUserInfo();
-  editAvatarPopup.setInputValue("avatarURL", userData.avatarUrl);
   formValidators[editAvatarPopupForm.getAttribute("name")].resetValidation();
   formValidators[editAvatarPopupForm.getAttribute("name")].enableSubmitButton();
   editAvatarPopup.open();
@@ -129,14 +128,14 @@ function handleAreYouSurePopupForm() {
     .deleteCard(areYouSurePopup.cardForDelete._id)
     .then(() => {
       areYouSurePopup.cardForDelete.deleteElementCard();
+      areYouSurePopup.close();
+      areYouSurePopup.cardForDelete = {}
     })
     .catch((err) => {
       alert(err);
     })
     .finally(() => {
       areYouSurePopup.setButtonText("Да");
-      areYouSurePopup.close();
-      areYouSurePopup.cardForDelete = {};
     });
 }
 
@@ -216,7 +215,7 @@ const cardsConteiner = new Section(
   cardsConteinerSelector
 );
 
-const areYouSurePopup = new PopupWithForm(
+const areYouSurePopup = new PopupWithConfirmation(
   areYouSurePopupSelector,
   handleAreYouSurePopupForm
 );
