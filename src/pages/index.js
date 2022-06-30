@@ -231,6 +231,10 @@ Promise.all([api.getUserInfo(), api.getCardsArray()])
   .then((data) => {
     userInfo.setUserData(data[0]);
     cardsConteiner.reverseRenderItems(data[1]);
+    setTimeout(() => {
+      document.querySelector('.preloader').remove();
+    }, 500);
+
   })
   .catch((err) => {
     alert(err);

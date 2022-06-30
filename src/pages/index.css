@@ -2,6 +2,9 @@
 
 @import url(../vendor/fonts/inter.css);
 
+@import url(../blocks/preloader/preloader.css);
+@import url(../blocks/preloader/__spinner/preloader__spinner.css);
+
 @import url(../blocks/page/page.css);
 @import url(../blocks/page/__button/page__button.css);
 
@@ -59,3 +62,5 @@
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+
