@@ -75,6 +75,8 @@ const cardsConteinerSelector = ".cards";
 
 const formValidators = {};
 
+const skeletonLoaderContainer = document.querySelector(".profile__user-card");
+
 export {
   fetchSetupData,
   validationSetupData,
@@ -94,4 +96,5 @@ export {
   editAvatarPopupForm,
   cardsConteinerSelector,
   formValidators,
+  skeletonLoaderContainer,
 };

@@ -7,23 +7,24 @@
     <title>МЕСТО</title>
   </head>
   <body class="page">
-    <div class="preloader">
+    <!-- <div class="preloader">
       <div class="preloader__spinner preloader__spinner_visible"><i></i></div>
-    </div>
+    </div> -->
     <header class="header">
       <div class="header__logo"></div>
     </header>
 
     <main class="main">
-
       <section class="profile">
-        <div class="profile__user-card">
-          <div class="profile__avatar-container">
+        <div class="profile__user-card skeleton-loader">
+          <div class="profile__avatar-container skeleton-loader__container">
             <img
               src="<%=require('./images/user-avatar.svg')%>"
               alt="Аватар пользователя"
               class="profile__user-avatar"
             />
+
+            <div class="image"></div>
             <button
               class="profile__avatar-overlay page__button"
               type="button"
@@ -33,14 +34,26 @@
 
           <div class="profile__user-info">
             <div class="profile__user-info-inner-container">
-              <h1 class="profile__user-name">User</h1>
+              <div class="skeleton-loader__container">
+                <div class="description"></div>
+                <h1 class="profile__user-name">
+                  ...............................
+                </h1>
+              </div>
+
               <button
                 class="profile__edit-button page__button"
                 type="button"
                 aria-label="Изменить"
               ></button>
             </div>
-            <p class="profile__user-about">About user</p>
+
+            <div class="skeleton-loader__container">
+              <p class="profile__user-about">
+                ...........................................
+              </p>
+              <div class="description"></div>
+            </div>
           </div>
         </div>
 

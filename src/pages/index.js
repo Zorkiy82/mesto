@@ -19,6 +19,7 @@ import {
   editAvatarPopupForm,
   cardsConteinerSelector,
   formValidators,
+  skeletonLoaderContainer,
 } from "../scripts/utils/constants.js";
 
 import { Api } from "../scripts/components/Api";
@@ -29,8 +30,13 @@ import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
 import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
 import { PopupWithConfirmation } from "../scripts/components/PopupWithConfirmation";
 import { UserInfo } from "../scripts/components/UserInfo.js";
+import { setTimeout } from "core-js";
 
 // ---------------------------------------------------------------------------------------------------------
+
+function toggleSkeletonLoaderState() {
+  skeletonLoaderContainer.classList.toggle("skeleton-loader");
+}
 
 function handleAddCardButton() {
   formValidators[cardPopupForm.getAttribute("name")].resetValidation();
@@ -92,11 +98,15 @@ function handleCardPopupForm({ cardTitel, imageURL }) {
 
 function handleProfilePopupForm({ userName, userAbout }) {
   profilePopup.setButtonText("Сохранение...");
+  toggleSkeletonLoaderState();
   api
     .patchUserInfo({ name: userName, about: userAbout })
     .then((userData) => {
       userInfo.setUserData(userData);
       profilePopup.close();
+      setTimeout(() => {
+        toggleSkeletonLoaderState();
+      }, 500);
     })
     .catch((err) => {
       alert(err);
@@ -108,11 +118,15 @@ function handleProfilePopupForm({ userName, userAbout }) {
 
 function handleEditAvatarPopupForm(data) {
   editAvatarPopup.setButtonText("Сохранение...");
+  toggleSkeletonLoaderState();
   api
     .patchUserAvatar({ avatar: data.avatarURL })
     .then((userData) => {
       userInfo.setUserData(userData);
       editAvatarPopup.close();
+      setTimeout(() => {
+        toggleSkeletonLoaderState();
+      }, 500);
     })
     .catch((err) => {
       alert(err);
@@ -129,7 +143,7 @@ function handleAreYouSurePopupForm() {
     .then(() => {
       areYouSurePopup.cardForDelete.deleteElementCard();
       areYouSurePopup.close();
-      areYouSurePopup.cardForDelete = {}
+      areYouSurePopup.cardForDelete = {};
     })
     .catch((err) => {
       alert(err);
@@ -230,11 +244,11 @@ editAvatarButton.addEventListener("click", handleEditAvatarButton);
 Promise.all([api.getUserInfo(), api.getCardsArray()])
   .then((data) => {
     userInfo.setUserData(data[0]);
-    cardsConteiner.reverseRenderItems(data[1]);
-    setTimeout(() => {
-      document.querySelector('.preloader').remove();
-    }, 500);
 
+    setTimeout(() => {
+      toggleSkeletonLoaderState();
+      cardsConteiner.reverseRenderItems(data[1]);
+    }, 500);
   })
   .catch((err) => {
     alert(err);

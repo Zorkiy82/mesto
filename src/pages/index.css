@@ -63,4 +63,5 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
-
+@import url(../blocks/skeleton-loader/skeleton-loader.css);
+@import url(../blocks/skeleton-loader/__container/skeleton-loader__container.css);
