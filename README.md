@@ -18,6 +18,6 @@ __7. Работа с API__
 
 ## Как запустить проект
 
-### `npm install`
+### `git clone git@github.com:Zorkiy82/mesto.git`
 ### `npm install`
 ### `npm run dev`
