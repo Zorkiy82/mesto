@@ -17,7 +17,8 @@ __7. Работа с API__
 ## Демо сайт: [https://zorkiy82.github.io/mesto/](https://zorkiy82.github.io/mesto/)
 
 ## Как запустить проект
+`git clone git@github.com:Zorkiy82/mesto.git`
 
-#### `git clone git@github.com:Zorkiy82/mesto.git`
-#### `npm install`
-#### `npm run dev`
+`npm install`
+
+`npm run dev`
