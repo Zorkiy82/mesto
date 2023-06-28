@@ -1,7 +1,9 @@
 const fetchSetupData = {
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-44",
+  // baseUrl: "https://mesto.nomoreparties.co/v1/cohort-44",
+  baseUrl: "api.mesto.ogorodnikovao.nomoreparties.sbs",
   headers: {
-    authorization: "113896b8-685b-4e8f-b932-f30a44a399cc",
+    // authorization: "113896b8-685b-4e8f-b932-f30a44a399cc",
+    authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDRlMWY0ZDExYmQzNDM0MmJiM2UxMGEiLCJpYXQiOjE2ODI4NjM0NTAsImV4cCI6MTY4MzQ2ODI1MH0.rXRP2hDTUaDJ30grrh2FzDCt3YN1TbZMIKuaWNZ6ILo",
     "Content-Type": "application/json",
   },
 };
